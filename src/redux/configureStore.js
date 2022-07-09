@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-const rootReducer = () => ({ status: 'Placeholder reducer' });
+import authReducer from './auth/auth';
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    auth: authReducer,
+  },
 });
 
 export default store;

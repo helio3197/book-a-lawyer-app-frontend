@@ -1,10 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { signUp } from '../redux/auth/auth';
 
 const SignUp = () => {
-  const state = null;
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  console.log(authState);
 
   return (
     <Container fluid>
@@ -35,7 +40,23 @@ const SignUp = () => {
           <Form.Control type="password" placeholder="Confirm password" />
           <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
         </Form.Group>
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(signUp(JSON.stringify({
+              user: {
+                name: 'Tester22',
+                email: 'fake3@email.com',
+                phone: 123456,
+                password: '123456',
+                password_confirmation: '',
+              },
+            })));
+          }}
+        >
+          Submit
+        </Button>
       </Form>
     </Container>
   );
