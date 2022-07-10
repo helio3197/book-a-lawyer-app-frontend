@@ -1,0 +1,19 @@
+.links {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hum-icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .abcd {
+    display: none;
+  }
