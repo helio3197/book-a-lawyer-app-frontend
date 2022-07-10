@@ -76,9 +76,6 @@ export const signUp = (body) => async (dispatch) => {
     const response = await fetch(API_SIGNUP_ENDPOINT, {
       method: 'POST',
       body,
-      headers: {
-        'Content-type': 'Application/json',
-      },
     });
     if (!response.ok) {
       throw (await response.json()).error;
