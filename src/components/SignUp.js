@@ -27,6 +27,16 @@ const SignUp = () => {
 
   console.log(authState); // debugging, will remove later
 
+  useEffect(() => {
+    if (authState.status === 'failed' && (formState.password || formState.password_confirmation)) {
+      setFormState((state) => ({
+        ...state,
+        password: '',
+        password_confirmation: '',
+      }));
+    }
+  }, [authState.status]);
+
   if (authState.userSignedIn) {
     if (authState.status === 'idle') {
       return ( // Should redirect to homepage with respective notice: User already signed in
@@ -41,16 +51,6 @@ const SignUp = () => {
       </div>
     );
   }
-
-  useEffect(() => {
-    if (authState.status === 'failed') {
-      setFormState((state) => ({
-        ...state,
-        password: '',
-        password_confirmation: '',
-      }));
-    }
-  }, [authState.status]);
 
   const removeSelectedPicture = () => {
     setFormState((state) => ({

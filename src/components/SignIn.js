@@ -16,6 +16,15 @@ const SignIn = () => {
 
   console.log(authState); // debugging, will remove later
 
+  useEffect(() => {
+    if (authState.status === 'failed' && formState.password) {
+      setFormState((state) => ({
+        ...state,
+        password: '',
+      }));
+    }
+  }, [authState.status]);
+
   if (authState.userSignedIn) {
     if (authState.status === 'idle') {
       return ( // Should redirect to homepage with respective notice: User already signed in
@@ -30,15 +39,6 @@ const SignIn = () => {
       </div>
     );
   }
-
-  useEffect(() => {
-    if (authState.status === 'failed') {
-      setFormState((state) => ({
-        ...state,
-        password: '',
-      }));
-    }
-  }, [authState.status]);
 
   const inputHandler = (e) => {
     const key = e.target.id;
@@ -58,9 +58,6 @@ const SignIn = () => {
     dispatch(signIn(form));
   };
 
-  const renderError = (key) => `${key} ${authState.error?.[key]?.join(', ')}`;
-  const validateInput = (key) => !!authState.error?.[key];
-
   return (
     <Container fluid="sm">
       <Container fluid className="py-3 border rounded form-width-sm shadow">
@@ -68,13 +65,12 @@ const SignIn = () => {
         <Form>
           <Form.Group controlId="email" className="mb-2">
             <Form.Label visuallyHidden>Email</Form.Label>
-            <Form.Control value={formState.email} onChange={inputHandler} type="email" placeholder="Email" isInvalid={validateInput('email')} />
-            <Form.Control.Feedback type="invalid">{renderError('email')}</Form.Control.Feedback>
+            <Form.Control value={formState.email} onChange={inputHandler} type="email" placeholder="Email" isInvalid={authState.error} />
           </Form.Group>
           <Form.Group controlId="password" className="mb-2">
             <Form.Label visuallyHidden>Password</Form.Label>
-            <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password" isInvalid={validateInput('password')} />
-            <Form.Control.Feedback type="invalid">{renderError('password')}</Form.Control.Feedback>
+            <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password" isInvalid={authState.error} />
+            <Form.Control.Feedback type="invalid">{authState.error}</Form.Control.Feedback>
           </Form.Group>
           <Button
             type="submit"
