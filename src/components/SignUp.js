@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -42,13 +42,15 @@ const SignUp = () => {
     );
   }
 
-  // if (authState.status === 'failed') {
-  //   return (
-  //     <div>
-  //       <h1>Failedd, errors</h1>
-  //     </div>
-  //   );
-  // }
+  useEffect(() => {
+    if (authState.status === 'failed') {
+      setFormState((state) => ({
+        ...state,
+        password: '',
+        password_confirmation: '',
+      }));
+    }
+  }, [authState.status]);
 
   const removeSelectedPicture = () => {
     setFormState((state) => ({
@@ -96,6 +98,9 @@ const SignUp = () => {
     dispatch(signUp(form));
   };
 
+  const renderError = (key) => `${key} ${authState.error?.[key]?.join(', ')}`;
+  const validateInput = (key) => !!authState.error?.[key];
+
   return (
     <Container fluid>
       <h1>Sign up</h1>
@@ -119,43 +124,31 @@ const SignUp = () => {
         </div>
         <Form.Group controlId="name">
           <Form.Label visuallyHidden>Name</Form.Label>
-          <Form.Control onChange={inputHandler} placeholder="Name" />
-          <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
+          <Form.Control value={formState.name} onChange={inputHandler} placeholder="Name" isInvalid={validateInput('name')} />
+          <Form.Control.Feedback type="invalid">{renderError('name')}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label visuallyHidden>Email</Form.Label>
-          <Form.Control onChange={inputHandler} type="email" placeholder="Email" />
-          <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
+          <Form.Control value={formState.email} onChange={inputHandler} type="email" placeholder="Email" isInvalid={validateInput('email')} />
+          <Form.Control.Feedback type="invalid">{renderError('email')}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="phone">
           <Form.Label visuallyHidden>Phone</Form.Label>
-          <Form.Control onChange={inputHandler} type="tel" placeholder="Phone number" />
-          <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
+          <Form.Control value={formState.phone} onChange={inputHandler} type="tel" placeholder="Phone number" isInvalid={validateInput('phone')} />
+          <Form.Control.Feedback type="invalid">{renderError('phone')}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="password">
           <Form.Label visuallyHidden>Password</Form.Label>
-          <Form.Control onChange={inputHandler} type="password" placeholder="Password" />
-          <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
+          <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password" isInvalid={validateInput('password')} />
+          <Form.Control.Feedback type="invalid">{renderError('password')}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="password_confirmation">
           <Form.Label visuallyHidden>Confirm password</Form.Label>
-          <Form.Control onChange={inputHandler} type="password" placeholder="Confirm password" />
-          <Form.Control.Feedback type="invalid">Custom Error</Form.Control.Feedback>
+          <Form.Control value={formState.password_confirmation} onChange={inputHandler} type="password" placeholder="Confirm password" isInvalid={validateInput('password_confirmation')} />
+          <Form.Control.Feedback type="invalid">{renderError('password_confirmation')}</Form.Control.Feedback>
         </Form.Group>
         <Button
           type="submit"
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   dispatch(signUp(JSON.stringify({
-          //     user: {
-          //       name: 'Tester22',
-          //       email: 'fake3@email.com',
-          //       phone: 123456,
-          //       password: '123456',
-          //       password_confirmation: '',
-          //     },
-          //   })));
-          // }}
           onClick={formHandler}
         >
           Submit
