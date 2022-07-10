@@ -6,7 +6,6 @@ import Home from './Components/Home';
 
 const App = () => (
   <>
-    {/* <Sidebar /> */}
     <div className="App" />
     <BrowserRouter>
       <Sidebar>
