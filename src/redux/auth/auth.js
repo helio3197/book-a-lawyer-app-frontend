@@ -1,4 +1,5 @@
 const API_SIGNUP_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users`;
+const API_SIGNIN_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_in`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
@@ -74,6 +75,26 @@ export const signUp = (body) => async (dispatch) => {
   dispatch(requestStarted());
   try {
     const response = await fetch(API_SIGNUP_ENDPOINT, {
+      method: 'POST',
+      body,
+    });
+    if (!response.ok) {
+      throw (await response.json()).error;
+    }
+
+    dispatch(requestCompleted({
+      token: response.headers.get('Authorization'),
+      user: (await response.json()).user,
+    }));
+  } catch (error) {
+    dispatch(requestFailed(error));
+  }
+};
+
+export const signIn = (body) => async (dispatch) => {
+  dispatch(requestStarted());
+  try {
+    const response = await fetch(API_SIGNIN_ENDPOINT, {
       method: 'POST',
       body,
     });
