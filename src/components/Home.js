@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = () => (
   <>
-    <h1>HOMEPAGE</h1>
+    <h1>HOMEPAGE PLACEHOLDER</h1>
   </>
 );
 
