@@ -1,20 +1,20 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Sidebar from './Components/Sidebar';
-import Home from './Components/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout';
+import Home from './components/home/Home';
+import SignUp from './components/auth/SignUp';
+import SignIn from './components/auth/SignIn';
 
 const App = () => (
-  <>
-    <div className="App" />
-    <BrowserRouter>
-      <Sidebar>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </Sidebar>
-    </BrowserRouter>
-  </>
+  <Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="sign_up" element={<SignUp />} />
+        <Route path="sign_in" element={<SignIn />} />
+      </Route>
+    </Routes>
+  </Router>
 );
 
 export default App;
