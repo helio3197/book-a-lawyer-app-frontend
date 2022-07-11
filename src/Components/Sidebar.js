@@ -23,59 +23,59 @@ const Sidebar = ({ children }) => {
       <main>
         <header className="mobile-head">
           <div className="top-head">
-            <h1 className="logo">My Logo</h1>
+            <h1 className="logo"><em>The Lawyer</em></h1>
             <div className="menu-icons">
               <div className="menudisplay">
-                <button type="button" onClick={onClick}>{ showResults ? <MenuIcon /> : <CancelIcon />}</button>
+                <button type="button" onClick={onClick}>{ showResults ? <MenuIcon className="humburger-icon" /> : <CancelIcon className="humburger-icon" />}</button>
               </div>
             </div>
           </div>
           {show
           && (
           <nav className="links">
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} to="/" className="link-item">Home</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} to="/" className="link-item">Home</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
           </nav>
           )}
         </header>
         <header className="desktop-head">
           <div className="desktop-top-head">
-            <h1 className="desktop-logo">My Logo</h1>
+            <h1 className="desktop-logo">The Lawyer</h1>
           </div>
           <nav className="desktop-links">
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} to="/" className="desktop-link-item">Home</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">Reserve</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">Reservations</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
           </nav>
           <footer className="desktop-footer">
             <ul className="footer-list">
               <li>
                 <a href="/">
-                  <EmailIcon />
+                  <EmailIcon className="the-item" />
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <FacebookIcon />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <TwitterIcon />
+                  <FacebookIcon className="the-item" />
                 </a>
 
               </li>
               <li>
                 <a href="/">
-                  <InstagramIcon />
+                  <TwitterIcon className="the-item" />
                 </a>
 
               </li>
               <li>
                 <a href="/">
-                  <LinkedInIcon />
+                  <InstagramIcon className="the-item" />
+                </a>
+
+              </li>
+              <li>
+                <a href="/">
+                  <LinkedInIcon className="the-item" />
                 </a>
 
               </li>
