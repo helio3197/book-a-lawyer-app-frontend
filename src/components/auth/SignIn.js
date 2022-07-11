@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { signIn, resetState } from '../redux/auth/auth';
+import { signIn, resetState } from '../../redux/auth/auth';
 
 const SignIn = () => {
   const formInitialState = {

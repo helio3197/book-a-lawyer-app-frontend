@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 const Layout = () => (
-  <>
-    <h1>(PLACEHOLDER)Section for navigation component</h1>
-    <section>
+  <div className="d-flex">
+    <Sidebar />
+    <main className="flex-grow-1">
       <Outlet />
-    </section>
-  </>
+    </main>
+  </div>
 );
 
 export default Layout;

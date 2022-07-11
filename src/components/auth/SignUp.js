@@ -6,8 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { GrFormClose } from 'react-icons/gr';
-import { resetState, signUp } from '../redux/auth/auth';
-import defaultAvatar from '../assets/images/profile-pic.png';
+import { resetState, signUp } from '../../redux/auth/auth';
+import defaultAvatar from '../../assets/images/profile-pic.png';
 
 const SignUp = () => {
   const formInitialState = {
