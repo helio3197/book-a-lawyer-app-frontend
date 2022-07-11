@@ -3,6 +3,7 @@ const API_SIGNIN_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_in`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
+const RESET_STATE = 'book-a-lawyer/auth/RESET_STATE';
 const initialState = () => {
   const auth = JSON.parse(localStorage.getItem('auth'));
   if (auth) {
@@ -41,6 +42,11 @@ const reducer = (state = initialState(), action) => {
         ...state,
         ...action.payload,
       };
+    case RESET_STATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }
@@ -68,6 +74,14 @@ const requestCompleted = (respone) => ({
     userSignedIn: true,
     authToken: respone.token,
     currentUser: respone.user,
+  },
+});
+
+export const resetState = () => ({
+  type: RESET_STATE,
+  payload: {
+    status: 'idle',
+    error: undefined,
   },
 });
 

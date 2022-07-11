@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { signIn } from '../redux/auth/auth';
+import { signIn, resetState } from '../redux/auth/auth';
 
 const SignIn = () => {
   const formInitialState = {
@@ -14,7 +15,9 @@ const SignIn = () => {
   const [formState, setFormState] = useState(formInitialState);
   const dispatch = useDispatch();
 
-  console.log(authState); // debugging, will remove later
+  // console.log(authState); // debugging, will remove later
+
+  useEffect(() => () => dispatch(resetState()), []);
 
   useEffect(() => {
     if (authState.status === 'failed' && formState.password) {
@@ -70,7 +73,7 @@ const SignIn = () => {
           <Form.Group controlId="password" className="mb-2">
             <Form.Label visuallyHidden>Password</Form.Label>
             <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password" isInvalid={authState.error} />
-            <Form.Control.Feedback type="invalid">{authState.error}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{typeof authState.error === 'string' ? authState.error : ''}</Form.Control.Feedback>
           </Form.Group>
           <Button
             type="submit"
@@ -79,6 +82,11 @@ const SignIn = () => {
             Sign In
           </Button>
         </Form>
+        <p className="m-0 text-center">
+          Don&apos;t have an account?
+          {' '}
+          <Link to="/sign_up">Sign up</Link>
+        </p>
       </Container>
     </Container>
   );

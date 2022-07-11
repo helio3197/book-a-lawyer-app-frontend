@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { GrFormClose } from 'react-icons/gr';
-import { signUp } from '../redux/auth/auth';
+import { resetState, signUp } from '../redux/auth/auth';
 import defaultAvatar from '../assets/images/profile-pic.png';
 
 const SignUp = () => {
@@ -25,7 +26,9 @@ const SignUp = () => {
   const [formState, setFormState] = useState(formInitialState);
   const dispatch = useDispatch();
 
-  console.log(authState); // debugging, will remove later
+  // console.log(authState); // debugging, will remove later
+
+  useEffect(() => () => dispatch(resetState()), []);
 
   useEffect(() => {
     if (authState.status === 'failed' && (formState.password || formState.password_confirmation)) {
@@ -155,6 +158,11 @@ const SignUp = () => {
             Sign Up
           </Button>
         </Form>
+        <p className="m-0 text-center">
+          Have you already an account?
+          {' '}
+          <Link to="/sign_in">Log in</Link>
+        </p>
       </Container>
     </Container>
   );

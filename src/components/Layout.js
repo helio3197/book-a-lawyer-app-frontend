@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => (
   <>
-    <h1>Section for navigation component</h1>
+    <h1>(PLACEHOLDER)Section for navigation component</h1>
     <section>
       <Outlet />
     </section>
