@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
-import '../App.css';
 import './Sidebar.css';
 import PropTypes from 'prop-types';
 
@@ -44,6 +43,14 @@ const Sidebar = ({ children }) => {
             <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">Reserve</NavLink>
             <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">Reservations</NavLink>
           </nav>
+          <footer className="desktop-footer">
+            <ul className="footer-list">
+              <li>Fac</li>
+              <li>Twi</li>
+              <li>Ins</li>
+            </ul>
+            <p> @2015 Copyright.Lawyers.Rich&Kenny</p>
+          </footer>
         </header>
         { children }
       </main>
