@@ -7,12 +7,10 @@ const Home = () => {
   const userSignedIn = useSelector((state) => state.auth.userSignedIn);
 
   return (
-    <Container fluid className="p-0">
-      <Container fluid className="py-2">
-        {userSignedIn
-          ? <h1>signed_in</h1>
-          : <Welcome />}
-      </Container>
+    <Container fluid className="p-0 h-100">
+      {userSignedIn
+        ? <h1>signed_in</h1>
+        : <Welcome />}
     </Container>
   );
 };
