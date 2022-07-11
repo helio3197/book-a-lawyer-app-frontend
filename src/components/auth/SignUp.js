@@ -108,12 +108,12 @@ const SignUp = () => {
     <Container fluid="sm">
       <Container fluid className="py-3 border rounded form-width-sm shadow">
         <h1 className="text-center">Create an account</h1>
-        <Form>
+        <Form className="mb-2">
           <div className="avatar mb-3">
             <div className="preview">
               <img src={formState.avatar.preview} alt="avatar preview" />
             </div>
-            <div className="image-upload">
+            <div className="image-upload flex-grow-1">
               <div className="file-picker">
                 <label htmlFor="avatar">Upload picture</label>
                 <input id="avatar" type="file" onChange={previewHandler} value={formState.avatar.value} accept="image/jpeg, image/png, image/gif" />
@@ -124,6 +124,7 @@ const SignUp = () => {
                   <GrFormClose />
                 </button>
               </div>
+              <Form.Control.Feedback type="invalid" className={validateInput('avatar') ? 'd-block' : ''}>{renderError('avatar')}</Form.Control.Feedback>
             </div>
           </div>
           <Form.Group controlId="name" className="mb-2">

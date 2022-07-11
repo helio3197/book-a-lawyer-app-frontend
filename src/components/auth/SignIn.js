@@ -65,7 +65,7 @@ const SignIn = () => {
     <Container fluid="sm">
       <Container fluid className="py-3 border rounded form-width-sm shadow">
         <h1 className="text-center">Log In</h1>
-        <Form>
+        <Form className="mb-2">
           <Form.Group controlId="email" className="mb-2">
             <Form.Label visuallyHidden>Email</Form.Label>
             <Form.Control value={formState.email} onChange={inputHandler} type="email" placeholder="Email" isInvalid={authState.error} />
