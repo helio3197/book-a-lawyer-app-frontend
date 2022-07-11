@@ -8,6 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+import Button from 'react-bootstrap/Button';
 
 const Sidebar = ({ children }) => {
   const [show, setShow] = useState(false);
@@ -38,7 +39,10 @@ const Sidebar = ({ children }) => {
               <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
               <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
             </nav>
-
+            <div className="d-grid gap-2 logoutb">
+              <Button variant="success" size="lg">LOGOUT</Button>
+              {' '}
+            </div>
           </>
           )}
         </header>
@@ -52,6 +56,10 @@ const Sidebar = ({ children }) => {
             <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
             <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
           </nav>
+          <div className="d-grid gap-2 logoutb">
+            <Button variant="success" size="lg">LOGOUT</Button>
+            {' '}
+          </div>
           <footer className="desktop-footer">
             <ul className="footer-list">
               <li>
