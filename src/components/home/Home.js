@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { useSelector } from 'react-redux';
 import Welcome from './Welcome';
+import LawyersIndex from './LawyersIndex';
 
 const Home = () => {
   const userSignedIn = useSelector((state) => state.auth.userSignedIn);
@@ -9,7 +10,7 @@ const Home = () => {
   return (
     <Container fluid className="p-0 h-100">
       {userSignedIn
-        ? <h1>signed_in</h1>
+        ? <LawyersIndex />
         : <Welcome />}
     </Container>
   );
