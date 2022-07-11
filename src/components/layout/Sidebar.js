@@ -9,10 +9,12 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import Button from 'react-bootstrap/Button';
+import { useSelector } from 'react-redux';
 
 const Sidebar = ({ children }) => {
   const [show, setShow] = useState(false);
   const [showResults, setShowResults] = useState(true);
+  const authState = useSelector((state) => state.auth.userSignedIn);
 
   const onClick = () => {
     setShowResults(!showResults);
@@ -35,9 +37,14 @@ const Sidebar = ({ children }) => {
           <>
             <nav className="links">
               <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
-              <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-              <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
-              <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
+              {authState
+                ? (
+                  <>
+                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
+                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
+                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
+                  </>
+                ) : null }
             </nav>
             <div className="d-grid gap-2 logoutb">
               <Button variant="success" size="lg">LOGOUT</Button>
@@ -51,15 +58,29 @@ const Sidebar = ({ children }) => {
             <h1 className="desktop-logo">The Lawyer</h1>
           </div>
           <nav className="desktop-links">
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
+            {authState
+              ? (
+                <>
+                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
+                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
+                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
+                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
+                </>
+              )
+              : (
+                <div className="d-grid gap-2 logoutb">
+                  <Button variant="success" size="lg">SIGN IN</Button>
+                  {' '}
+                </div>
+              )}
           </nav>
-          <div className="d-grid gap-2 logoutb">
-            <Button variant="success" size="lg">LOGOUT</Button>
-            {' '}
-          </div>
+          {authState
+            ? (
+              <div className="d-grid gap-2 logoutb">
+                <Button variant="success" size="lg">LOGOUT</Button>
+                {' '}
+              </div>
+            ) : null }
           <footer className="desktop-footer">
             <ul className="footer-list">
               <li>
@@ -92,7 +113,7 @@ const Sidebar = ({ children }) => {
 
               </li>
             </ul>
-            <p> ©2015 Lawyers.Ricky&Kenny</p>
+            <p> ©2022 Lawyers.Ricky&Kenny</p>
           </footer>
         </header>
         { children }
