@@ -28,7 +28,14 @@ const Sidebar = ({ children }) => {
             <h1 className="logo"><em>The Lawyer</em></h1>
             <div className="menu-icons">
               <div className="menudisplay">
-                <button type="button" onClick={onClick}>{ showResults ? <MenuIcon className="humburger-icon" /> : <CancelIcon className="humburger-icon" />}</button>
+                {authState
+                  ? <button type="button" onClick={onClick}>{ showResults ? <MenuIcon className="humburger-icon" /> : <CancelIcon className="humburger-icon" />}</button>
+                  : (
+                    <div className="d-grid gap-2 logoutc">
+                      <Button href="/sign_in" variant="success" size="md">Sign In</Button>
+                      {' '}
+                    </div>
+                  ) }
               </div>
             </div>
           </div>
@@ -36,18 +43,15 @@ const Sidebar = ({ children }) => {
           && (
           <>
             <nav className="links">
-              <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
-              {authState
-                ? (
-                  <>
-                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
-                    <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
-                  </>
-                ) : null }
+              <>
+                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
+                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
+                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
+                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
+              </>
             </nav>
             <div className="d-grid gap-2 logoutb">
-              <Button variant="success" size="lg">LOGOUT</Button>
+              <Button variant="success" size="lg" className="loginsmall">LOGOUT</Button>
               {' '}
             </div>
           </>
@@ -69,8 +73,9 @@ const Sidebar = ({ children }) => {
               )
               : (
                 <div className="d-grid gap-2 logoutb">
-                  <Button variant="success" size="lg">SIGN IN</Button>
+                  <Button href="/sign_in" variant="success" size="lg">SIGN IN</Button>
                   {' '}
+                  <Button href="/sign_up" variant="success" size="lg">SIGN UP</Button>
                 </div>
               )}
           </nav>

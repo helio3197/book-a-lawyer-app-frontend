@@ -69,6 +69,14 @@
   padding-bottom: 20px;
 }
 
+.logoutc {
+
+}
+
+.loginsmall {
+ font-size: 10px;
+}
+
 @media screen and (min-width: 913px) and (max-width: 1199px) {
   .main-menu {
     display: flex !important;
@@ -140,6 +148,7 @@
     margin: auto;
   }
 }
+
 
 @media screen and (min-width: 1200px) {
   .main-menu {
