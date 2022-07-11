@@ -3,6 +3,10 @@
   color: black !important;
 }
 
+.main-menu {
+  display: block !important;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -11,9 +15,9 @@
 
 .link-item {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 6px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 10px;
   font-family: Righteous;
   font-weight: bolder;
 }
@@ -58,6 +62,10 @@
 }
 
 @media screen and (min-width: 913px) and (max-width: 1199px) {
+  .main-menu {
+    display: flex !important;
+  }
+
   .mobile-head {
     display: none;
   }
@@ -90,7 +98,7 @@
   .desktop-link-item {
     padding: 30px;
     text-decoration: none;
-    font-size: 200%;
+    font-size: 100%;
     font-family: Righteous;
     font-weight: bolder;
   }
@@ -116,6 +124,10 @@
 }
 
 @media screen and (min-width: 1200px) {
+  .main-menu {
+    display: flex !important;
+  }
+  
   .mobile-head {
     display: none;
   }
@@ -149,7 +161,7 @@
   .desktop-link-item {
     padding: 30px;
     text-decoration: none;
-    font-size: 200%;
+    font-size: 100%;
     font-family: Righteous;
     font-weight: bolder;
   }

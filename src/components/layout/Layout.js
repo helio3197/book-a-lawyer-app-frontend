@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const Layout = () => (
-  <div className="d-flex">
+  <div className="d-flex main-menu">
     <Sidebar />
     <main className="flex-grow-1">
       <Outlet />
