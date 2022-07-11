@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 const Sidebar = ({ children }) => {
   const [show, setShow] = useState(false);
   const [showResults, setShowResults] = useState(true);
-  //   const onClick = () => setShowResults(!showResults);
 
   const onClick = () => {
     setShowResults(!showResults);
@@ -17,13 +16,12 @@ const Sidebar = ({ children }) => {
   };
   return (
     <>
-
       <main>
-        <header className="d-flex">
+        <header className="mobile-head">
           <div className="top-head">
-            <h1>My Logo</h1>
+            <h1 className="logo">My Logo</h1>
             <div className="menu-icons">
-              <div>
+              <div className="menudisplay">
                 <button type="button" onClick={onClick}>{ showResults ? <MenuIcon /> : <CancelIcon />}</button>
               </div>
             </div>
@@ -42,10 +40,6 @@ const Sidebar = ({ children }) => {
     </>
   );
 };
-
-// const Results = () => (
-//   <MenuIcon />
-// );
 
 Sidebar.propTypes = {
   children: PropTypes.node.isRequired,

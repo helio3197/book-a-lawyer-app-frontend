@@ -1,6 +1,12 @@
 .links {
     display: flex;
     flex-direction: column;
+    padding: 10px;
+}
+
+.link-item  {
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .top-head {
@@ -14,6 +20,14 @@
     height: 120px;
   }
 
-  .abcd {
-    display: none;
-  }
+.menudisplay {
+padding-right: 20px;
+}
+
+.logo {
+    padding-left: 20px;
+}
+
+.mobile-head {
+    background-color:cyan;
+}
