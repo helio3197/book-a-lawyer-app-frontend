@@ -9,6 +9,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+// import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
+// import CancelPresentationRoundedIcon from '@mui/icons-material/CancelPresentationRounded';
 
 const Sidebar = ({ children }) => {
   const [show, setShow] = useState(false);
@@ -33,9 +35,9 @@ const Sidebar = ({ children }) => {
           {show
           && (
           <nav className="links">
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} to="/" className="link-item">Home</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
           </nav>
           )}
         </header>
@@ -44,9 +46,10 @@ const Sidebar = ({ children }) => {
             <h1 className="desktop-logo">The Lawyer</h1>
           </div>
           <nav className="desktop-links">
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
-            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
           </nav>
           <footer className="desktop-footer">
             <ul className="footer-list">
@@ -80,7 +83,7 @@ const Sidebar = ({ children }) => {
 
               </li>
             </ul>
-            <p> @2015 Lawyers.Rich&Kenny</p>
+            <p> ©2015 Lawyers.Ricky&Kenny</p>
           </footer>
         </header>
         { children }
