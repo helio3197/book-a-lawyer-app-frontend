@@ -13,6 +13,8 @@
     padding: 10px;
     text-decoration: none;
     font-size: 25px;
+    font-family: Righteous;
+    font-weight: bolder;
 }
 
 .top-head {
@@ -88,7 +90,8 @@ padding-right: 20px;
         padding: 30px;
         text-decoration: none;
         font-size: 200%;
-        font-family: Ubuntu;
+        font-family: Righteous;
+        font-weight: bolder;
     }
 
     .desktop-footer {
