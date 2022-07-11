@@ -3,6 +3,10 @@
   color: black !important;
 }
 
+.main-menu {
+  display: block !important;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -11,9 +15,9 @@
 
 .link-item {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 6px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 10px;
   font-family: Righteous;
   font-weight: bolder;
 }
@@ -51,13 +55,29 @@
 
 .mobile-head {
   border-bottom: 1px solid;
+  padding-top: 15px;
+  padding-bottom: 8px;
 }
 
 .desktop-head {
   display: none;
 }
 
+.logoutb {
+  width: 50% !important;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.loginsmall {
+  font-size: 10px;
+}
+
 @media screen and (min-width: 913px) and (max-width: 1199px) {
+  .main-menu {
+    display: flex !important;
+  }
+
   .mobile-head {
     display: none;
   }
@@ -67,7 +87,8 @@
     flex-direction: column;
     width: 25vw;
     height: 100vh;
-    background-color: #7cfc00;
+    border: 0.5px solid;
+    box-shadow: 4px 1px #888;
   }
 
   .desktop-links {
@@ -81,16 +102,16 @@
   }
 
   .desktop-logo {
-    padding: 8px 25px 25px 65px;
+    padding: 30px 25px 10px 65px;
     font-family: 'Water Brush', cursive;
-    font-size: 4rem;
+    font-size: 2rem;
     transform: rotate(-20deg);
   }
 
   .desktop-link-item {
     padding: 30px;
     text-decoration: none;
-    font-size: 200%;
+    font-size: 80%;
     font-family: Righteous;
     font-weight: bolder;
   }
@@ -111,11 +132,24 @@
 
   .desktop-footer p {
     text-align: center;
-    padding-left: 50px;
+    padding-left: 30px;
+  }
+
+  .the-item {
+    color: black;
+  }
+
+  .logoutb {
+    width: 70% !important;
+    margin: auto;
   }
 }
 
 @media screen and (min-width: 1200px) {
+  .main-menu {
+    display: flex !important;
+  }
+
   .mobile-head {
     display: none;
   }
@@ -137,10 +171,11 @@
 
   .desktop-top-head {
     height: 20vh;
+    padding-left: 10px;
   }
 
   .desktop-logo {
-    padding: 8px 25px 25px 65px;
+    padding: 40px 25px 10px 65px;
     font-family: 'Water Brush', cursive;
     font-size: 3rem;
     transform: rotate(-20deg);
@@ -149,7 +184,7 @@
   .desktop-link-item {
     padding: 30px;
     text-decoration: none;
-    font-size: 200%;
+    font-size: 100%;
     font-family: Righteous;
     font-weight: bolder;
   }
@@ -176,5 +211,10 @@
 
   .the-item {
     color: black;
+  }
+
+  .logoutb {
+    width: 70% !important;
+    margin: auto;
   }
 }
