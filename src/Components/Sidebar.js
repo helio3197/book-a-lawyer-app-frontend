@@ -35,6 +35,16 @@ const Sidebar = ({ children }) => {
           </nav>
           )}
         </header>
+        <header className="desktop-head">
+          <div className="top-head">
+            <h1 className="logo">My Logo</h1>
+          </div>
+          <nav className="links">
+            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} to="/" className="link-item">Home</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
+            <NavLink style={({ isActive }) => ((isActive) ? { color: 'red' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
+          </nav>
+        </header>
         { children }
       </main>
     </>

@@ -34,8 +34,16 @@ padding-right: 20px;
     background-color:cyan;
 }
 
+.desktop-head {
+    display: none;
+}
+
 @media screen and (min-width: 913px) {
     .mobile-head {
         display: none;
+    }
+
+    .desktop-head {
+        display: flex;
     }
   }
