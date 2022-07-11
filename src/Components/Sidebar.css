@@ -45,5 +45,30 @@ padding-right: 20px;
 
     .desktop-head {
         display: flex;
+        flex-direction: column;
+        width: 19vw;
+        height: 100vh;
+        background-color: aqua;
+    }
+
+    .desktop-links {
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    .desktop-top-head {
+        height: 20vh;
+    }
+
+    .desktop-logo {
+        padding: 25px;
+    }
+
+    .desktop-link-item {
+        padding: 30px;
+        text-decoration: none;
+        font-size: 200%;
+        background-color: aliceblue;
     }
   }
