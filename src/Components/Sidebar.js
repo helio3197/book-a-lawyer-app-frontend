@@ -4,6 +4,11 @@ import { NavLink } from 'react-router-dom';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './Sidebar.css';
 import PropTypes from 'prop-types';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
 
 const Sidebar = ({ children }) => {
   const [show, setShow] = useState(false);
@@ -45,11 +50,37 @@ const Sidebar = ({ children }) => {
           </nav>
           <footer className="desktop-footer">
             <ul className="footer-list">
-              <li>Fac</li>
-              <li>Twi</li>
-              <li>Ins</li>
+              <li>
+                <a href="/">
+                  <EmailIcon />
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <FacebookIcon />
+                </a>
+
+              </li>
+              <li>
+                <a href="/">
+                  <TwitterIcon />
+                </a>
+
+              </li>
+              <li>
+                <a href="/">
+                  <InstagramIcon />
+                </a>
+
+              </li>
+              <li>
+                <a href="/">
+                  <LinkedInIcon />
+                </a>
+
+              </li>
             </ul>
-            <p> @2015 Copyright.Lawyers.Rich&Kenny</p>
+            <p> @2015 Lawyers.Rich&Kenny</p>
           </footer>
         </header>
         { children }

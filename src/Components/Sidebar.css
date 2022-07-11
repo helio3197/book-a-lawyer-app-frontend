@@ -85,5 +85,11 @@ padding-right: 20px;
 
     .footer-list li {
      padding: 10px;
+     list-style: none;
+    }
+
+    .desktop-footer p {
+       text-align: center;
+       padding-left: 50px;
     }
   }
