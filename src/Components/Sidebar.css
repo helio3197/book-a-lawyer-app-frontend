@@ -1,182 +1,179 @@
 .is-active {
-    color: black !important;
+  color: black !important;
 }
 
 .links {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
-.link-item  {
-    margin-bottom: 10px;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 25px;
-    font-family: Righteous;
-    font-weight: bolder;
+.link-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Righteous;
+  font-weight: bolder;
 }
 
 .top-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .hum-icon {
-    width: 120px;
-    height: 120px;
-    background-color: white;
-  }
+  width: 120px;
+  height: 120px;
+  background-color: white;
+}
 
-  .humburger-icon {
-   background-color: white;
-   border: none;
-  }
+.humburger-icon {
+  background-color: white;
+  border: none;
+}
 
 .menudisplay {
-padding-right: 20px;
+  padding-right: 20px;
 }
 
 .menudisplay button {
-    background-color: white;
+  background-color: white;
 }
 
 .logo {
-    padding-left: 20px;
-    font-family: 'Water Brush', cursive;
-    font-size: 2rem;
+  padding-left: 20px;
+  font-family: 'Water Brush', cursive;
+  font-size: 2rem;
 }
 
 .mobile-head {
-    border-bottom: 1px solid;
+  border-bottom: 1px solid;
 }
 
 .desktop-head {
-    display: none;
+  display: none;
 }
 
 @media screen and (min-width: 913px) and (max-width: 1199px) {
-    .mobile-head {
-        display: none;
-    }
-
-    .desktop-head {
-        display: flex;
-        flex-direction: column;
-        width: 25vw;
-        height: 100vh;
-        background-color: #7CFC00;
-    }
-
-    .desktop-links {
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
-    }
-
-    .desktop-top-head {
-        height: 20vh;
-    }
-
-    .desktop-logo {
-        padding: 8px 25px 25px 65px;
-        font-family: 'Water Brush', cursive;
-        font-size: 4rem;
-        transform: rotate(-20deg);
-    }
-
-    .desktop-link-item {
-        padding: 30px;
-        text-decoration: none;
-        font-size: 200%;
-        font-family: Righteous;
-        font-weight: bolder;
-    }
-
-    .desktop-footer {
-        position: absolute;
-        bottom: 20px;
-    }
-    
-    .footer-list {
-        display: flex;
-       
-    }
-
-    .footer-list li {
-     padding: 10px;
-     list-style: none;
-    }
-
-    .desktop-footer p {
-       text-align: center;
-       padding-left: 50px;
-    }
+  .mobile-head {
+    display: none;
   }
+
+  .desktop-head {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 100vh;
+    background-color: #7cfc00;
+  }
+
+  .desktop-links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+  }
+
+  .desktop-top-head {
+    height: 20vh;
+  }
+
+  .desktop-logo {
+    padding: 8px 25px 25px 65px;
+    font-family: 'Water Brush', cursive;
+    font-size: 4rem;
+    transform: rotate(-20deg);
+  }
+
+  .desktop-link-item {
+    padding: 30px;
+    text-decoration: none;
+    font-size: 200%;
+    font-family: Righteous;
+    font-weight: bolder;
+  }
+
+  .desktop-footer {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .footer-list {
+    display: flex;
+  }
+
+  .footer-list li {
+    padding: 10px;
+    list-style: none;
+  }
+
+  .desktop-footer p {
+    text-align: center;
+    padding-left: 50px;
+  }
+}
 
 @media screen and (min-width: 1200px) {
-    .mobile-head {
-        display: none;
-    }
-
-    .desktop-head {
-        display: flex;
-        flex-direction: column;
-        width: 20vw;
-        height: 100vh;
-        border:  0.5px solid;
-        box-shadow: 4px 1px #888888;
-    }
-
-    .desktop-links {
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
-    }
-
-    .desktop-top-head {
-        height: 20vh;
-    }
-
-    .desktop-logo {
-        padding: 8px 25px 25px 65px;
-        font-family: 'Water Brush', cursive;
-        font-size: 3rem;
-        transform: rotate(-20deg);;
-    }
-
-    .desktop-link-item {
-        padding: 30px;
-        text-decoration: none;
-        font-size: 200%;
-        font-family: Righteous;
-        font-weight: bolder;
-    }
-
-
-    .desktop-footer {
-        position: absolute;
-        bottom: 20px;
-    }
-    
-    .footer-list {
-        display: flex;
-       
-    }
-
-    .footer-list li {
-     padding: 10px;
-     list-style: none;
-     color: black;
-    }
-
-    .desktop-footer p {
-       text-align: center;
-       padding-left: 50px;
-    }
-    
-    .the-item {
-        color: black;
-    }
+  .mobile-head {
+    display: none;
   }
+
+  .desktop-head {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 100vh;
+    border: 0.5px solid;
+    box-shadow: 4px 1px #888;
+  }
+
+  .desktop-links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+  }
+
+  .desktop-top-head {
+    height: 20vh;
+  }
+
+  .desktop-logo {
+    padding: 8px 25px 25px 65px;
+    font-family: 'Water Brush', cursive;
+    font-size: 3rem;
+    transform: rotate(-20deg);
+  }
+
+  .desktop-link-item {
+    padding: 30px;
+    text-decoration: none;
+    font-size: 200%;
+    font-family: Righteous;
+    font-weight: bolder;
+  }
+
+  .desktop-footer {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .footer-list {
+    display: flex;
+  }
+
+  .footer-list li {
+    padding: 10px;
+    list-style: none;
+    color: black;
+  }
+
+  .desktop-footer p {
+    text-align: center;
+    padding-left: 50px;
+  }
+
+  .the-item {
+    color: black;
+  }
+}
