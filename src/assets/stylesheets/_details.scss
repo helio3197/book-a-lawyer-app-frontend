@@ -1,0 +1,45 @@
+.detail-section {
+    padding: 10px;
+text-align: center;
+}
+
+.profile-pic {
+ padding-left: 20px;
+}
+
+.profile-name {
+    margin: 20px auto 10px;
+}
+
+.bio {
+    padding: 20px 20px 10px 20px;
+}
+
+.lawyer-items {
+    text-align: left !important;
+    list-style: none;
+}
+
+
+@media screen and (min-width: 1200px) {
+    .detail-section {
+        display: flex;
+    }
+
+    .profile-pic {
+        width: 400px;
+        height: 400px;
+        text-align: center;
+        margin-left: 30px;
+       }
+    
+    .top-details {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        margin-left: 70px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
