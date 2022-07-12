@@ -4,7 +4,6 @@ const REQUEST_FAILED = 'book-a-lawyer/lawyers/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/lawyers/REQUEST_COMPLETED';
 const initialState = {
   status: 'idle',
-  statusLawyers: 'not_started',
 };
 
 const reducer = (state = initialState, action) => {
@@ -44,11 +43,10 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestLawyersCompleted = ({ lawyers }) => ({
+const requestCompleted = ({ lawyers }) => ({
   type: REQUEST_COMPLETED,
   payload: {
-    status: 'idle',
-    statusLawyers: 'completed',
+    status: 'completed',
     lawyers,
   },
 });
@@ -66,7 +64,7 @@ export const getLawyers = () => async (dispatch, getState) => {
       throw (await response.json()).error;
     }
 
-    dispatch(requestLawyersCompleted(await response.json()));
+    dispatch(requestCompleted(await response.json()));
   } catch (error) {
     dispatch(requestFailed(error));
   }

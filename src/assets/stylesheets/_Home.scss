@@ -1,6 +1,10 @@
-.welcome {
+.welcome,
+.lawyers {
   display: flex;
   flex-direction: column;
+}
+
+.welcome {
   justify-content: center;
   align-items: center;
   height: 100%;
