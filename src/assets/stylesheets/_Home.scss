@@ -51,3 +51,32 @@
   color: darkgray;
   border: 1px solid;
 }
+
+.lawyers-carousel {
+  .carousel-inner {
+    padding: 0 74px 39px;
+  }
+}
+
+.carousel-next-icon,
+.carousel-prev-icon {
+  color: white;
+  background-color: greenyellow;
+  font-size: 1.6rem;
+}
+
+.carousel-next-icon {
+  padding: 0.8rem 2rem 0.8rem 1rem;
+  border-radius: 50% 0 0 50%;
+}
+
+.carousel-prev-icon {
+  padding: 0.8rem 1rem 0.8rem 2rem;
+  border-radius: 0 50% 50% 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+  opacity: 0.7;
+}
