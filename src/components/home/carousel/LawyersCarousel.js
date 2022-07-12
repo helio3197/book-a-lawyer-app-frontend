@@ -7,6 +7,7 @@ import LawyerCard from './LawyerCard';
 const LawyersCarousel = ({ items }) => {
   const carouselContainer = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (!carouselContainer.current) {
@@ -25,6 +26,12 @@ const LawyersCarousel = ({ items }) => {
   const c = Math.floor(containerWidth / 285);
   const cardsPerItem = c >= 1 ? c : 1;
   const numberOfItems = Math.ceil(items.length / cardsPerItem);
+
+  useEffect(() => {
+    if (currentSlide > numberOfItems - 1) {
+      setCurrentSlide(0);
+    }
+  });
 
   const renderCarouselItems = (cardsInItems, itemsAmount) => {
     const carouselItems = [];
@@ -61,16 +68,18 @@ const LawyersCarousel = ({ items }) => {
       variant="dark"
       ref={carouselContainer}
       nextIcon={(
-        <span className="carousel-next-icon">
+        <span className={`carousel-next-icon ${currentSlide === (numberOfItems - 1) ? 'disabled' : ''}`}>
           <BsCaretRight />
         </span>
       )}
       prevIcon={(
-        <span className="carousel-prev-icon">
+        <span className={`carousel-prev-icon ${currentSlide === 0 ? 'disabled' : ''}`}>
           <BsCaretLeft />
         </span>
       )}
       className="lawyers-carousel"
+      activeIndex={currentSlide}
+      onSelect={(slide) => { setCurrentSlide(slide); }}
     >
       {renderCarouselItems(cardsPerItem, numberOfItems)}
     </Carousel>
