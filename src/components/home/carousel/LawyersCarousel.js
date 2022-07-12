@@ -15,7 +15,7 @@ const LawyersCarousel = ({ items }) => {
     }
     const { element } = carouselContainer.current;
     const resizeObserver = new ResizeObserver(() => {
-      setContainerWidth(element.clientWidth);
+      setContainerWidth(element.clientWidth - 148);
     });
     resizeObserver.observe(element);
     return () => {

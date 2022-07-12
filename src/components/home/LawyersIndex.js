@@ -40,7 +40,7 @@ const LawyersIndex = () => {
       <p className="text-center border-bottom mx-auto">Select a lawyer to continue</p>
       {lawyersState.lawyers.length
         ? (
-          <Container fluid="sm" className="p-0">
+          <Container fluid="sm" className="p-0 my-auto">
             <LawyersCarousel items={lawyersState.lawyers} />
           </Container>
         ) : (
