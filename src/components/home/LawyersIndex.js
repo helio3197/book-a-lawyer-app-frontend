@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
-// import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
+import LawyersCarousel from './carousel/LawyersCarousel';
 
 const LawyersIndex = () => {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const lawyersState = useSelector((state) => state.lawyers);
 
@@ -39,9 +37,17 @@ const LawyersIndex = () => {
   return (
     <Container as="section" fluid className="py-2 lawyers">
       <h1 className="mt-3 text-center">Available lawyers</h1>
+      <p className="text-center border-bottom mx-auto">Select a lawyer to continue</p>
       {lawyersState.lawyers.length
-        ? <h2>{lawyersState.lawyers[0].name}</h2>
-        : <p className="text-center mt-5 fs-5">There are no available lawyers yet.</p>}
+        ? (
+          <Container fluid="sm" className="p-0">
+            <LawyersCarousel items={lawyersState.lawyers} />
+          </Container>
+        ) : (
+          <Container fluid="sm">
+            <p className="text-center mt-5 fs-5">There are no available lawyers yet.</p>
+          </Container>
+        )}
     </Container>
   );
 };

@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import defaultAvatar from '../../../assets/images/profile-pic.png';
 
 const LawyerCard = ({
-  name, avatarUrl, location, rates,
+  name, avatarUrl, location, rates, id,
 }) => (
   <div className="lawyer-card">
-    <img src={avatarUrl} alt={name} />
-    <p className="name">{name.toUpperCase()}</p>
+    <Link to={`/lawyers/${id}`} className="d-block text-decoration-none text-reset">
+      <img src={avatarUrl} alt={name} />
+    </Link>
+    <Link to={`/lawyers/${id}`} className="d-block text-decoration-none text-reset">
+      <p className="name">{name.toUpperCase()}</p>
+    </Link>
     <p className="info">{`${location} | $${rates} / hr`}</p>
     <div>
       <ul className="list-unstyled d-flex gap-3 justify-content-center">
@@ -40,6 +45,7 @@ LawyerCard.propTypes = {
   avatarUrl: PropTypes.string,
   location: PropTypes.string.isRequired,
   rates: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 LawyerCard.defaultProps = {
