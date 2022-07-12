@@ -36,7 +36,7 @@ const LawyersIndex = () => {
 
   return (
     <Container as="section" fluid className="py-2 lawyers">
-      <h1 className="mt-3 text-center">Available lawyers</h1>
+      <h1 className="mt-3 text-center">AVAILABLE LAWYERS</h1>
       <p className="text-center border-bottom mx-auto">Select a lawyer to continue</p>
       {lawyersState.lawyers.length
         ? (
