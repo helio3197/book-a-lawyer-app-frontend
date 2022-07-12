@@ -61,6 +61,12 @@
       padding: 0 40px 39px;
     }
   }
+
+  .carousel-item.active,
+  .carousel-item-next,
+  .carousel-item-prev {
+    display: flex;
+  }
 }
 
 .carousel-next-icon,

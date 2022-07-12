@@ -35,6 +35,7 @@ const LawyersCarousel = ({ items }) => {
       while (items[k] && j < cardsInItems) {
         cards.push((
           <LawyerCard
+            key={items[k].id}
             name={items[k].name}
             avatarUrl={items[k].avatar_url}
             location={items[k].location}
@@ -46,7 +47,7 @@ const LawyersCarousel = ({ items }) => {
         k += 1;
       }
       carouselItems.push((
-        <Carousel.Item>
+        <Carousel.Item key={i}>
           {cards}
         </Carousel.Item>
       ));
