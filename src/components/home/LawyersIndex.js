@@ -10,7 +10,7 @@ const LawyersIndex = () => {
   const lawyersState = useSelector((state) => state.lawyers);
 
   useEffect(() => {
-    if (lawyersState.statusLawyers !== 'completed') {
+    if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
   }, []);
