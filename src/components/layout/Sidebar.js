@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
-import CancelIcon from '@mui/icons-material/Cancel';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-import Button from 'react-bootstrap/Button';
-import { useSelector } from 'react-redux';
 
-const Sidebar = ({ children }) => {
+const Sidebar = () => {
   const [show, setShow] = useState(false);
   const [showResults, setShowResults] = useState(true);
   const authState = useSelector((state) => state.auth.userSignedIn);
@@ -20,115 +18,71 @@ const Sidebar = ({ children }) => {
     setShowResults(!showResults);
     setShow(!show);
   };
+
+  const navActive = ({ isActive }) => (isActive ? { backgroundColor: 'greenyellow', color: 'white' } : {});
+
   return (
-    <>
-      <main>
-        <header className="mobile-head">
-          <div className="top-head">
-            <h1 className="logo"><em>The Lawyer</em></h1>
-            <div className="menu-icons">
-              <div className="menudisplay">
-                {authState
-                  ? <button type="button" onClick={onClick}>{ showResults ? <MenuIcon className="humburger-icon" /> : <CancelIcon className="humburger-icon" />}</button>
-                  : (
-                    <div className="d-grid gap-2 logoutc">
-                      <Button href="/sign_in" variant="success" size="md">Sign In</Button>
-                      {' '}
-                    </div>
-                  ) }
-              </div>
+    <header>
+      <Navbar expand="lg">
+        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
+        <Navbar.Offcanvas id="offcanvasNavbar-expand">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>
+              <Link to="/" className="text-reset logo">
+                The Lawyers
+              </Link>
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column">
+            <div className="navbar-links">
+              <NavLink to="/" style={navActive} className="link-item">
+                LAWYERS
+              </NavLink>
+              <NavLink to="/reserve" style={navActive} className="link-item">
+                BOOK A LAWYER
+              </NavLink>
+              <NavLink to="/reservations" style={navActive} className="link-item">
+                MY RESERVATIONS
+              </NavLink>
+              <NavLink to="/account" style={navActive} className="link-item">
+                MY ACCOUNT
+              </NavLink>
             </div>
-          </div>
-          {show
-          && (
-          <>
-            <nav className="links">
-              <>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
-              </>
-            </nav>
-            <div className="d-grid gap-2 logoutb">
-              <Button variant="success" size="lg" className="loginsmall">LOGOUT</Button>
-              {' '}
+            <div className="mt-auto">
+              <ul className="list-unstyled d-flex social-icons gap-2">
+                <li className="text-secondary">
+                  <a href="/">
+                    <EmailIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <FacebookIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <TwitterIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <InstagramIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <LinkedInIcon className="the-item" />
+                  </a>
+                </li>
+              </ul>
+              <p className="small m-0">©2022 Lawyers.Ricky&Kenny</p>
             </div>
-          </>
-          )}
-        </header>
-        <header className="desktop-head">
-          <div className="desktop-top-head">
-            <h1 className="desktop-logo">The Lawyer</h1>
-          </div>
-          <nav className="desktop-links">
-            {authState
-              ? (
-                <>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
-                </>
-              )
-              : (
-                <div className="d-grid gap-2 logoutb">
-                  <Button href="/sign_in" variant="success" size="lg">SIGN IN</Button>
-                  {' '}
-                  <Button href="/sign_up" variant="success" size="lg">SIGN UP</Button>
-                </div>
-              )}
-          </nav>
-          {authState
-            ? (
-              <div className="d-grid gap-2 logoutb">
-                <Button variant="success" size="lg">LOGOUT</Button>
-                {' '}
-              </div>
-            ) : null }
-          <footer className="desktop-footer">
-            <ul className="footer-list">
-              <li>
-                <a href="/">
-                  <EmailIcon className="the-item" />
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <FacebookIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <TwitterIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <InstagramIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <LinkedInIcon className="the-item" />
-                </a>
-
-              </li>
-            </ul>
-            <p> ©2022 Lawyers.Ricky&Kenny</p>
-          </footer>
-        </header>
-        { children }
-      </main>
-    </>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Navbar>
+    </header>
   );
-};
-
-Sidebar.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Sidebar;
