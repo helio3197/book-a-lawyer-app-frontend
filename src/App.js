@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './components/home/Home';
-import Lawyer from './components/home/Details';
+import Lawyer from './components/details/Details';
 import SignUp from './components/auth/SignUp';
 import SignIn from './components/auth/SignIn';
 

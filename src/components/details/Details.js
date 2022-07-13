@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { useSelector } from 'react-redux';
-import Welcome from './Welcome';
+import Welcome from '../home/Welcome';
 import Detail from './LawyerDetails';
 
 const Lawyer = () => {
