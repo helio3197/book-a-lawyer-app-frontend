@@ -67,13 +67,13 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestCompleted = (respone) => ({
+const requestCompleted = (response) => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'success',
     userSignedIn: true,
-    authToken: respone.token,
-    currentUser: respone.user,
+    authToken: response.token,
+    currentUser: response.user,
   },
 });
 
