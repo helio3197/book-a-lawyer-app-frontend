@@ -97,7 +97,7 @@ const Sidebar = () => {
                   </a>
                 </li>
               </ul>
-              <p className="small m-0">©2022 Lawyers.Ricky&Kenny</p>
+              <p className="small m-0">©2022 Lawyers | Ricky&Kenny</p>
             </div>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

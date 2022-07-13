@@ -1,8 +1,10 @@
 const API_SIGNUP_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users`;
 const API_SIGNIN_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_in`;
+const API_SIGNOUT_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_out`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
+const SIGNOUT_COMPLETED = 'book-a-lawyer/auth/SIGNOUT_COMPLETED';
 const RESET_STATE = 'book-a-lawyer/auth/RESET_STATE';
 const initialState = () => {
   const auth = JSON.parse(localStorage.getItem('auth'));
@@ -47,6 +49,9 @@ const reducer = (state = initialState(), action) => {
         ...state,
         ...action.payload,
       };
+    case SIGNOUT_COMPLETED:
+      localStorage.removeItem('auth');
+      return action.payload;
     default:
       return state;
   }
@@ -74,6 +79,14 @@ const requestCompleted = (response) => ({
     userSignedIn: true,
     authToken: response.token,
     currentUser: response.user,
+  },
+});
+
+const signoutRequestCompleted = () => ({
+  type: SIGNOUT_COMPLETED,
+  payload: {
+    status: 'idle',
+    userSignedIn: false,
   },
 });
 
@@ -120,6 +133,26 @@ export const signIn = (body) => async (dispatch) => {
       token: response.headers.get('Authorization'),
       user: (await response.json()).user,
     }));
+  } catch (error) {
+    dispatch(requestFailed(error));
+  }
+};
+
+export const signOut = () => async (dispatch, getState) => {
+  dispatch(requestStarted());
+  try {
+    const { authToken } = getState().auth;
+    const response = await fetch(API_SIGNOUT_ENDPOINT, {
+      method: 'DELETE',
+      headers: {
+        Authorization: authToken,
+      },
+    });
+    if (!response.ok) {
+      throw (await response.json()).error;
+    }
+
+    dispatch(signoutRequestCompleted());
   } catch (error) {
     dispatch(requestFailed(error));
   }
