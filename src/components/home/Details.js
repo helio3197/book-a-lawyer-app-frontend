@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
-// import Logo from '../../assets/images/profile-pic.png';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
 const Detail = () => {
@@ -16,6 +16,24 @@ const Detail = () => {
       dispatch(getLawyers());
     }
   }, []);
+
+  if (lawyersState.status === 'idle' || lawyersState.status === 'fetching') {
+    return (
+      <Container as="section" fluid className="py-2 lawyers align-items-center">
+        <Spinner animation="border" variant="primary" role="status" className="my-auto">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
+  if (lawyersState.status === 'failed') {
+    return (
+      <Container as="section" fluid className="py-2 lawyers">
+        <h2 className="mt-2">{`Something went wrong: ${lawyersState.error}`}</h2>
+      </Container>
+    );
+  }
 
   const lawyer = lawyersState.lawyers.filter((lawyer) => lawyer.id === +(params.id))[0];
 
