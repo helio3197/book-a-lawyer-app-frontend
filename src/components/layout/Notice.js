@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Alert from 'react-bootstrap/Alert';
 
 const Notice = ({ message }) => {
+  const [show, setShow] = useState(true);
   useEffect(() => {
     window.history.pushState({
       ...window.history.state,
@@ -10,9 +12,9 @@ const Notice = ({ message }) => {
   }, []);
 
   return (
-    <div className="position-absolute text-light bg-secondary" style={{ top: '60px', left: '25px', right: '25px' }}>
-      {message}
-    </div>
+    <Alert show={show} onClose={() => setShow(false)} variant="primary" dismissible className="notice m-0">
+      <p className="m-0">{message}</p>
+    </Alert>
   );
 };
 

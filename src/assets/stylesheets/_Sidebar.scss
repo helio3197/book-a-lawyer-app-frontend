@@ -2,6 +2,11 @@
   position: absolute;
   left: 0.5rem;
   top: 0.5rem;
+  z-index: 999;
+
+  nav {
+    padding: 0;
+  }
 
   @media (min-width: 992px) {
     position: static;

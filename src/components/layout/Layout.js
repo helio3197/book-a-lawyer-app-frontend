@@ -17,9 +17,9 @@ const Layout = () => {
 
   return (
     <div className="d-flex h-100 position-relative">
-      {notice && <Notice message={notice} />}
       <Sidebar />
-      <main className="flex-grow-1">
+      <main className="flex-grow-1 position-relative">
+        {notice && <Notice message={notice} />}
         <Outlet />
       </main>
     </div>
