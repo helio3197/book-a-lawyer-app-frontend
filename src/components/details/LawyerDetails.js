@@ -36,6 +36,7 @@ const Detail = () => {
   }
 
   const lawyer = lawyersState.lawyers.filter((lawyer) => lawyer.id === +(params.id))[0];
+  const mylink = `/reserve?lawyer=${lawyer.id}`;
 
   return (
     <section className="detail-section">
@@ -79,7 +80,7 @@ const Detail = () => {
             </li>
           </div>
         </ul>
-        <Button href="/reserve" variant="success" size="lg" className="resrvebtn">Reserve</Button>
+        <Button href={mylink} variant="success" size="lg" className="resrvebtn">Reserve</Button>
       </div>
     </section>
   );
