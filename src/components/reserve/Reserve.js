@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Spinner from 'react-bootstrap/Spinner';
 import CustomDropMenu from './CustomDropMenu';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
@@ -12,11 +13,19 @@ const Reserve = () => {
   const selectedLawyer = params.get('lawyer');
   const lawyersState = useSelector((state) => state.lawyers);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { lawyers } = lawyersState;
   const mediaQuerySm = window.matchMedia('(min-width: 600px)');
   const [dropdownPosition, setDropdownPosition] = useState(mediaQuerySm.matches ? 'end' : 'down');
 
   console.log(selectedLawyer);
+
+  useEffect(() => {
+    if (lawyersState.status === 'failed') {
+      navigate(`${location.pathname}${location.search}`, { status: { notice: `Something went wrong: ${lawyersState.error}` } });
+    }
+  }, [lawyersState.status]);
 
   useEffect(() => {
     if (lawyersState.status !== 'completed') {
@@ -51,6 +60,14 @@ const Reserve = () => {
                   <p className="m-0 text-truncate">{lawyer.name}</p>
                 </Dropdown.Item>
               ))}
+              {lawyersState.status === 'fetching'
+                && (
+                  <Dropdown.Item eventKey="1" className="text-center">
+                    <Spinner animation="border" variant="primary" role="status" className="my-auto">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  </Dropdown.Item>
+                )}
             </Dropdown.Menu>
           </Dropdown>
         </Form>
