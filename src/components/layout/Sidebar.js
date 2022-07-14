@@ -1,134 +1,146 @@
-import React, { useState } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
-import CancelIcon from '@mui/icons-material/Cancel';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import Nav from 'react-bootstrap/Nav';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-import Button from 'react-bootstrap/Button';
-import { useSelector } from 'react-redux';
+import { signOut, resetState } from '../../redux/auth/auth';
 
-const Sidebar = ({ children }) => {
-  const [show, setShow] = useState(false);
-  const [showResults, setShowResults] = useState(true);
-  const authState = useSelector((state) => state.auth.userSignedIn);
+const Sidebar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    userSignedIn: authState,
+    status: authStatus,
+    error: authError,
+  } = useSelector((state) => state.auth);
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  const onClick = () => {
-    setShowResults(!showResults);
-    setShow(!show);
+  useEffect(() => {
+    if (authStatus === 'signed_out' || authStatus === 'signed_out_failed') dispatch(resetState());
+    if (authStatus === 'signed_out') {
+      navigate('/', { state: { notice: 'You have signed out successfully' } });
+    }
+    if (authStatus === 'signed_out_failed') {
+      navigate('/', { state: { notice: `Something went wrong: ${authError}` } });
+    }
+  }, [authStatus]);
+
+  const navActive = ({ isActive }) => (isActive ? { backgroundColor: 'greenyellow', color: 'white' } : {});
+
+  const signoutHandler = () => {
+    setShowSidebar((state) => !state);
+    dispatch(signOut());
   };
-  return (
+
+  const navLinkHelper = ({
+    href, children, onClick,
+  }) => (
+    <NavLink className="link-item" style={navActive} to={href} onClick={onClick}>
+      {children}
+    </NavLink>
+  );
+
+  const navLinksNotSignedIn = () => (
     <>
-      <main>
-        <header className="mobile-head">
-          <div className="top-head">
-            <h1 className="logo"><em>The Lawyer</em></h1>
-            <div className="menu-icons">
-              <div className="menudisplay">
-                {authState
-                  ? <button type="button" onClick={onClick}>{ showResults ? <MenuIcon className="humburger-icon" /> : <CancelIcon className="humburger-icon" />}</button>
-                  : (
-                    <div className="d-grid gap-2 logoutc">
-                      <Button href="/sign_in" variant="success" size="md">Sign In</Button>
-                      {' '}
-                    </div>
-                  ) }
-              </div>
-            </div>
-          </div>
-          {show
-          && (
-          <>
-            <nav className="links">
-              <>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="link-item">Home</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="link-item">Reserve</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="link-item">Reservations</NavLink>
-                <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="link-item">Manage</NavLink>
-              </>
-            </nav>
-            <div className="d-grid gap-2 logoutb">
-              <Button variant="success" size="lg" className="loginsmall">LOGOUT</Button>
-              {' '}
-            </div>
-          </>
-          )}
-        </header>
-        <header className="desktop-head">
-          <div className="desktop-top-head">
-            <h1 className="desktop-logo">The Lawyer</h1>
-          </div>
-          <nav className="desktop-links">
-            {authState
-              ? (
-                <>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} to="/" className="desktop-link-item">HOME</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reserve" className="desktop-link-item">RESERVE</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Reservations" className="desktop-link-item">RESERVATIONS</NavLink>
-                  <NavLink style={({ isActive }) => ((isActive) ? { backgroundColor: 'green', color: 'white' } : {})} activeClassName="is-active" to="/Manage" className="desktop-link-item">MANAGE</NavLink>
-                </>
-              )
-              : (
-                <div className="d-grid gap-2 logoutb">
-                  <Button href="/sign_in" variant="success" size="lg">SIGN IN</Button>
-                  {' '}
-                  <Button href="/sign_up" variant="success" size="lg">SIGN UP</Button>
-                </div>
-              )}
-          </nav>
-          {authState
-            ? (
-              <div className="d-grid gap-2 logoutb">
-                <Button variant="success" size="lg">LOGOUT</Button>
-                {' '}
-              </div>
-            ) : null }
-          <footer className="desktop-footer">
-            <ul className="footer-list">
-              <li>
-                <a href="/">
-                  <EmailIcon className="the-item" />
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <FacebookIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <TwitterIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <InstagramIcon className="the-item" />
-                </a>
-
-              </li>
-              <li>
-                <a href="/">
-                  <LinkedInIcon className="the-item" />
-                </a>
-
-              </li>
-            </ul>
-            <p> ©2022 Lawyers.Ricky&Kenny</p>
-          </footer>
-        </header>
-        { children }
-      </main>
+      <Nav.Link as={navLinkHelper} href="/sign_up">
+        SIGN UP
+      </Nav.Link>
+      <Nav.Link as={navLinkHelper} href="/sign_in">
+        SIGN IN
+      </Nav.Link>
     </>
   );
-};
 
-Sidebar.propTypes = {
-  children: PropTypes.node.isRequired,
+  const navLinks = () => (
+    <>
+      <Nav.Link href="/" as={navLinkHelper}>
+        LAWYERS
+      </Nav.Link>
+      <Nav.Link href="/reserve" as={navLinkHelper}>
+        BOOK A LAWYER
+      </Nav.Link>
+      <Nav.Link href="/reservations" as={navLinkHelper}>
+        MY RESERVATIONS
+      </Nav.Link>
+      <Nav.Link href="/account" as={navLinkHelper}>
+        MY ACCOUNT
+      </Nav.Link>
+      <Button type="button" onClick={signoutHandler} className="link-item btn btn-link bg-transparent border-0 text-start">
+        SIGN OUT
+      </Button>
+    </>
+  );
+
+  return (
+    <header className="sidebar">
+      <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
+        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
+        <Navbar.Offcanvas id="offcanvasNavbar-expand">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>
+              <Link to="/" className="text-reset logo" onClick={() => setShowSidebar((state) => !state)}>
+                The Lawyers
+              </Link>
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column">
+            <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
+              The Lawyers
+            </Link>
+            <Nav className="navbar-links position-relative flex-column">
+              {authState ? navLinks() : navLinksNotSignedIn()}
+              {authStatus === 'fetching_signout'
+                && (
+                  <div className="signout-loading">
+                    <Spinner animation="border" variant="primary" role="status" className="my-auto">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  </div>
+                )}
+            </Nav>
+            <div className="mt-auto ms-2">
+              <ul className="list-unstyled d-flex social-icons gap-3">
+                <li className="text-secondary">
+                  <a href="/">
+                    <EmailIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <FacebookIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <TwitterIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <InstagramIcon className="the-item" />
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <LinkedInIcon className="the-item" />
+                  </a>
+                </li>
+              </ul>
+              <p className="small m-0">©2022 Lawyers | Ricky&Kenny</p>
+            </div>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Navbar>
+    </header>
+  );
 };
 
 export default Sidebar;

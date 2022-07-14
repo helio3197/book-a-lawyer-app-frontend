@@ -1,220 +1,93 @@
-/* stylelint-disable font-family-no-missing-generic-family-keyword */
-.is-active {
-  color: black !important;
-}
+.sidebar {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 999;
 
-.main-menu {
-  display: block !important;
-}
+  nav {
+    padding: 0;
+  }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
+  @media (min-width: 992px) {
+    position: static;
+    flex-shrink: 0;
+    width: 25%;
+    min-width: 270px;
+    max-width: 350px;
+    border-right: 1px solid lightgray;
 
-.link-item {
-  margin-bottom: 10px;
-  padding: 6px;
-  text-decoration: none;
-  font-size: 10px;
-  font-family: Righteous;
-  font-weight: bolder;
-}
+    .navbar-expand-lg {
+      height: 100%;
+    }
 
-.top-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .offcanvas {
+      height: 100%;
+    }
 
-.hum-icon {
-  width: 120px;
-  height: 120px;
-  background-color: white;
-}
+    .offcanvas-body {
+      height: 100%;
+      padding-left: 0.7rem;
+    }
 
-.humburger-icon {
-  background-color: white;
-  border: none;
-}
-
-.menudisplay {
-  padding-right: 20px;
-}
-
-.menudisplay button {
-  background-color: white;
+    .logo {
+      font-size: 3rem;
+      transform: rotate(-13deg);
+    }
+  }
 }
 
 .logo {
-  padding-left: 20px;
   font-family: 'Water Brush', cursive;
-  font-size: 2rem;
+  font-size: 2.7rem;
+  transform: rotate(-13deg) translateY(0.8rem);
+  display: block;
 }
 
-.mobile-head {
-  border-bottom: 1px solid;
-  padding-top: 15px;
-  padding-bottom: 8px;
+.offcanvas-start {
+  width: 80%;
+  max-width: 320px;
+  min-width: 255px;
 }
 
-.desktop-head {
-  display: none;
-}
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4rem;
 
-.logoutb {
-  width: 50% !important;
-  margin: auto;
-  padding-bottom: 20px;
-}
+  @media (max-width: 375px) {
+    margin-top: 2rem;
 
-.loginsmall {
-  font-size: 10px;
-}
-
-@media screen and (min-width: 913px) and (max-width: 1199px) {
-  .main-menu {
-    display: flex !important;
-  }
-
-  .mobile-head {
-    display: none;
-  }
-
-  .desktop-head {
-    display: flex;
-    flex-direction: column;
-    width: 25vw;
-    height: 100vh;
-    border: 0.5px solid;
-    box-shadow: 4px 1px #888;
-  }
-
-  .desktop-links {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-  }
-
-  .desktop-top-head {
-    height: 20vh;
-  }
-
-  .desktop-logo {
-    padding: 30px 25px 10px 65px;
-    font-family: 'Water Brush', cursive;
-    font-size: 2rem;
-    transform: rotate(-20deg);
-  }
-
-  .desktop-link-item {
-    padding: 30px;
-    text-decoration: none;
-    font-size: 80%;
-    font-family: Righteous;
-    font-weight: bolder;
-  }
-
-  .desktop-footer {
-    position: absolute;
-    bottom: 20px;
-  }
-
-  .footer-list {
-    display: flex;
-  }
-
-  .footer-list li {
-    padding: 10px;
-    list-style: none;
-  }
-
-  .desktop-footer p {
-    text-align: center;
-    padding-left: 30px;
-  }
-
-  .the-item {
-    color: black;
-  }
-
-  .logoutb {
-    width: 70% !important;
-    margin: auto;
+    .link-item {
+      padding: 7px 7px 7px 15px;
+      font-size: 1.3rem;
+    }
   }
 }
 
-@media screen and (min-width: 1200px) {
-  .main-menu {
-    display: flex !important;
-  }
+.link-item {
+  padding: 15px 15px 15px 30px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: Righteous, sans-serif;
+  font-weight: bold;
+  color: $secondary;
+}
 
-  .mobile-head {
-    display: none;
+.social-icons {
+  a {
+    color: $secondary;
   }
+}
 
-  .desktop-head {
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
-    height: 100vh;
-    border: 0.5px solid;
-    box-shadow: 4px 1px #888;
-  }
-
-  .desktop-links {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-  }
-
-  .desktop-top-head {
-    height: 20vh;
-    padding-left: 10px;
-  }
-
-  .desktop-logo {
-    padding: 40px 25px 10px 65px;
-    font-family: 'Water Brush', cursive;
-    font-size: 3rem;
-    transform: rotate(-20deg);
-  }
-
-  .desktop-link-item {
-    padding: 30px;
-    text-decoration: none;
-    font-size: 100%;
-    font-family: Righteous;
-    font-weight: bolder;
-  }
-
-  .desktop-footer {
-    position: absolute;
-    bottom: 20px;
-  }
-
-  .footer-list {
-    display: flex;
-  }
-
-  .footer-list li {
-    padding: 10px;
-    list-style: none;
-    color: black;
-  }
-
-  .desktop-footer p {
-    text-align: center;
-    padding-left: 50px;
-  }
-
-  .the-item {
-    color: black;
-  }
-
-  .logoutb {
-    width: 70% !important;
-    margin: auto;
-  }
+.signout-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4d4d4d7d;
 }

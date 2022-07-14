@@ -10,7 +10,7 @@ const LawyersIndex = () => {
   const lawyersState = useSelector((state) => state.lawyers);
 
   useEffect(() => {
-    if (lawyersState.statusLawyers !== 'completed') {
+    if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
   }, []);
@@ -36,18 +36,22 @@ const LawyersIndex = () => {
 
   return (
     <Container as="section" fluid className="py-2 lawyers">
-      <h1 className="mt-3 text-center">AVAILABLE LAWYERS</h1>
-      <p className="text-center border-bottom mx-auto">Select a lawyer to continue</p>
-      {lawyersState.lawyers.length
-        ? (
-          <Container fluid="sm" className="p-0 my-auto">
-            <LawyersCarousel items={lawyersState.lawyers} />
-          </Container>
-        ) : (
-          <Container fluid="sm">
-            <p className="text-center mt-5 fs-5">There are no available lawyers yet.</p>
-          </Container>
-        )}
+      <div className="my-auto">
+        <div className="mt-3 mb-5">
+          <h1 className="text-center">AVAILABLE LAWYERS</h1>
+          <p className="text-center border-bottom mx-auto" style={{ width: 'max-content' }}>Select a lawyer to continue</p>
+        </div>
+        {lawyersState.lawyers.length
+          ? (
+            <Container fluid="sm" className="p-0 my-auto">
+              <LawyersCarousel items={lawyersState.lawyers} />
+            </Container>
+          ) : (
+            <Container fluid="sm">
+              <p className="text-center mt-5 fs-5">There are no available lawyers yet.</p>
+            </Container>
+          )}
+      </div>
     </Container>
   );
 };

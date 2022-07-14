@@ -1,8 +1,12 @@
 const API_SIGNUP_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users`;
 const API_SIGNIN_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_in`;
+const API_SIGNOUT_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_out`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
+const SIGNOUT_STARTED = 'book-a-lawyer/auth/SIGNOUT_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
+const SIGNOUT_FAILED = 'book-a-lawyer/auth/SIGNOUT_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
+const SIGNOUT_COMPLETED = 'book-a-lawyer/auth/SIGNOUT_COMPLETED';
 const RESET_STATE = 'book-a-lawyer/auth/RESET_STATE';
 const initialState = () => {
   const auth = JSON.parse(localStorage.getItem('auth'));
@@ -24,11 +28,13 @@ const initialState = () => {
 const reducer = (state = initialState(), action) => {
   switch (action.type) {
     case REQUEST_STARTED:
+    case SIGNOUT_STARTED:
       return {
         ...state,
         ...action.payload,
       };
     case REQUEST_FAILED:
+    case SIGNOUT_FAILED:
       return {
         ...state,
         ...action.payload,
@@ -47,6 +53,9 @@ const reducer = (state = initialState(), action) => {
         ...state,
         ...action.payload,
       };
+    case SIGNOUT_COMPLETED:
+      localStorage.removeItem('auth');
+      return action.payload;
     default:
       return state;
   }
@@ -59,10 +68,25 @@ const requestStarted = () => ({
   },
 });
 
+const signoutRequestStarted = () => ({
+  type: SIGNOUT_STARTED,
+  payload: {
+    status: 'fetching_signout',
+  },
+});
+
 const requestFailed = (error) => ({
   type: REQUEST_FAILED,
   payload: {
     status: 'failed',
+    error,
+  },
+});
+
+const signoutRequestFailed = (error) => ({
+  type: SIGNOUT_FAILED,
+  payload: {
+    status: 'signed_out_failed',
     error,
   },
 });
@@ -74,6 +98,14 @@ const requestCompleted = (response) => ({
     userSignedIn: true,
     authToken: response.token,
     currentUser: response.user,
+  },
+});
+
+const signoutRequestCompleted = () => ({
+  type: SIGNOUT_COMPLETED,
+  payload: {
+    status: 'signed_out',
+    userSignedIn: false,
   },
 });
 
@@ -122,6 +154,26 @@ export const signIn = (body) => async (dispatch) => {
     }));
   } catch (error) {
     dispatch(requestFailed(error));
+  }
+};
+
+export const signOut = () => async (dispatch, getState) => {
+  dispatch(signoutRequestStarted());
+  try {
+    const { authToken } = getState().auth;
+    const response = await fetch(API_SIGNOUT_ENDPOINT, {
+      method: 'DELETE',
+      headers: {
+        Authorization: authToken,
+      },
+    });
+    if (!response.ok) {
+      throw (await response.json()).error;
+    }
+
+    dispatch(signoutRequestCompleted());
+  } catch (error) {
+    dispatch(signoutRequestFailed(error));
   }
 };
 
