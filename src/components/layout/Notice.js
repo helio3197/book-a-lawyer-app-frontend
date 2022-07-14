@@ -9,9 +9,6 @@ const Notice = ({ message }) => {
       ...window.history.state,
       usr: { ...window.history.state.usr, notice: null },
     }, 'Remove notice');
-  }, []);
-
-  useEffect(() => {
     setShow(true);
   }, [message]);
 
