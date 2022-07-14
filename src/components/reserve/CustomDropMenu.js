@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-const CustomMenu = ({
+const customMenu = ({
   children, style, className, 'aria-labelledby': labeledBy,
 }, ref) => {
   const [value, setValue] = useState('');
@@ -30,17 +29,4 @@ const CustomMenu = ({
   );
 };
 
-CustomMenu.propTypes = {
-  children: PropTypes.node.isRequired,
-  style: PropTypes.objectOf(PropTypes.string),
-  className: PropTypes.string,
-  'aria-labelledby': PropTypes.string,
-};
-
-CustomMenu.defaultProps = {
-  style: {},
-  className: null,
-  'aria-labelledby': null,
-};
-
-export default React.forwardRef(CustomMenu);
+export default React.forwardRef(customMenu);
