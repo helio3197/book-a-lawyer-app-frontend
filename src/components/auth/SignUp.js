@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { GrFormClose } from 'react-icons/gr';
 import { resetState, signUp } from '../../redux/auth/auth';
 import defaultAvatar from '../../assets/images/profile-pic.png';
@@ -25,8 +26,7 @@ const SignUp = () => {
   const authState = useSelector((state) => state.auth);
   const [formState, setFormState] = useState(formInitialState);
   const dispatch = useDispatch();
-
-  // console.log(authState); // debugging, will remove later
+  const navigate = useNavigate();
 
   useEffect(() => () => dispatch(resetState()), []);
 
@@ -38,22 +38,14 @@ const SignUp = () => {
         password_confirmation: '',
       }));
     }
-  }, [authState.status]);
-
-  if (authState.userSignedIn) {
-    if (authState.status === 'idle') {
-      return ( // Should redirect to homepage with respective notice: User already signed in
-        <div>
-          <h1>(PLACEHOLDER) Already signed_in, redirecting to home</h1>
-        </div>
-      );
+    if (authState.userSignedIn) {
+      if (authState.status === 'success') {
+        navigate('/', { state: { notice: 'Account created successfully' } });
+      } else {
+        navigate('/', { state: { notice: 'You are already signed in!' } });
+      }
     }
-    return ( // Should redirect to homepage with respective notice: User registered successfully
-      <div>
-        <h1>(PLACEHOLDER) Success, should redirect to home</h1>
-      </div>
-    );
-  }
+  }, [authState.status]);
 
   const removeSelectedPicture = () => {
     setFormState((state) => ({
@@ -108,7 +100,7 @@ const SignUp = () => {
     <Container fluid="sm" className="h-100 d-flex">
       <Container fluid className="py-3 border rounded form-width-sm shadow my-auto">
         <h1 className="text-center">Create an account</h1>
-        <Form className="mb-2">
+        <Form className="mb-2 position-relative">
           <div className="avatar mb-3">
             <div className="preview">
               <img src={formState.avatar.preview} alt="avatar preview" />
@@ -158,6 +150,14 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
+          {authState.status === 'fetching'
+            && (
+              <div className="signout-loading">
+                <Spinner animation="border" variant="primary" role="status" className="my-auto">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
         </Form>
         <p className="m-0 text-center">
           Have you already an account?
