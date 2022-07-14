@@ -62,8 +62,8 @@ const SignIn = () => {
   };
 
   return (
-    <Container fluid="sm">
-      <Container fluid className="py-3 border rounded form-width-sm shadow">
+    <Container fluid="sm" className="h-100 d-flex">
+      <Container fluid className="py-3 border rounded form-width-sm shadow my-auto">
         <h1 className="text-center">Log In</h1>
         <Form className="mb-2">
           <Form.Group controlId="email" className="mb-2">

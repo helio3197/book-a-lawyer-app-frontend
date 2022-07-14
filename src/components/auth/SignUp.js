@@ -105,8 +105,8 @@ const SignUp = () => {
   const validateInput = (key) => !!authState.error?.[key];
 
   return (
-    <Container fluid="sm">
-      <Container fluid className="py-3 border rounded form-width-sm shadow">
+    <Container fluid="sm" className="h-100 d-flex">
+      <Container fluid className="py-3 border rounded form-width-sm shadow my-auto">
         <h1 className="text-center">Create an account</h1>
         <Form className="mb-2">
           <div className="avatar mb-3">
