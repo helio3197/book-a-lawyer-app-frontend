@@ -69,7 +69,7 @@
   padding: 15px 15px 15px 30px;
   text-decoration: none;
   font-size: 1.5rem;
-  font-family: Righteous;
+  font-family: Righteous, sans-serif;
   font-weight: bold;
   color: $secondary;
 }
@@ -89,5 +89,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #4d4d4d7d
+  background-color: #4d4d4d7d;
 }
