@@ -2,17 +2,46 @@
   position: absolute;
   left: 0.5rem;
   top: 0.5rem;
+
+  @media (min-width: 992px) {
+    position: static;
+    flex-shrink: 0;
+    width: 25%;
+    min-width: 270px;
+    max-width: 400px;
+    border-right: 1px solid lightgray;
+
+    .navbar-expand-lg {
+      height: 100%;
+    }
+
+    .offcanvas {
+      height: 100%;
+    }
+
+    .offcanvas-body {
+      height: 100%;
+      padding-left: 0.7rem;
+    }
+
+    .logo {
+      font-size: 3rem;
+      transform: rotate(-13deg);
+    }
+  }
 }
 
 .logo {
   font-family: 'Water Brush', cursive;
-  font-size: 2rem;
+  font-size: 2.7rem;
   transform: rotate(-13deg) translateY(0.8rem);
   display: block;
 }
 
 .offcanvas-start {
+  width: 80%;
   max-width: 320px;
+  min-width: 255px;
 }
 
 .navbar-links {
@@ -35,4 +64,16 @@
   a {
     color: $secondary;
   }
+}
+
+.signout-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2828287d
 }

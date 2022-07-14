@@ -2,6 +2,7 @@ const API_SIGNUP_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users`;
 const API_SIGNIN_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_in`;
 const API_SIGNOUT_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_out`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
+const SIGNOUT_STARTED = 'book-a-lawyer/auth/SIGNOUT_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
 const SIGNOUT_COMPLETED = 'book-a-lawyer/auth/SIGNOUT_COMPLETED';
@@ -26,6 +27,7 @@ const initialState = () => {
 const reducer = (state = initialState(), action) => {
   switch (action.type) {
     case REQUEST_STARTED:
+    case SIGNOUT_STARTED:
       return {
         ...state,
         ...action.payload,
@@ -64,6 +66,13 @@ const requestStarted = () => ({
   },
 });
 
+const signoutRequestStarted = () => ({
+  type: SIGNOUT_STARTED,
+  payload: {
+    status: 'fetching_signout',
+  },
+});
+
 const requestFailed = (error) => ({
   type: REQUEST_FAILED,
   payload: {
@@ -85,7 +94,7 @@ const requestCompleted = (response) => ({
 const signoutRequestCompleted = () => ({
   type: SIGNOUT_COMPLETED,
   payload: {
-    status: 'idle',
+    status: 'signed_out',
     userSignedIn: false,
   },
 });
@@ -139,7 +148,7 @@ export const signIn = (body) => async (dispatch) => {
 };
 
 export const signOut = () => async (dispatch, getState) => {
-  dispatch(requestStarted());
+  dispatch(signoutRequestStarted());
   try {
     const { authToken } = getState().auth;
     const response = await fetch(API_SIGNOUT_ENDPOINT, {
