@@ -13,22 +13,20 @@ const Reservations = () => {
     }
     console.log(reservationState);
   }, []);
+  console.log(reservationState);
   return (
-    <>
-      <h1>This is the Reservations page!</h1>
-      <section>
-        <div>
-          <div>
-            <p>Lawyers Name</p>
-            <p>Reserve Date</p>
-          </div>
-          <div>
-            <Button />
-            <Button />
-          </div>
+    <section className="reservationtop">
+      <div className="reservation">
+        <div className="reservationdeatails">
+          <p>Lawyers Name</p>
+          <p>Reserve Date</p>
         </div>
-      </section>
-    </>
+        <div className="reservationbtns">
+          <Button href="/" className="button-custom">Edit</Button>
+          <Button href="/">Delete</Button>
+        </div>
+      </div>
+    </section>
   );
 };
 
