@@ -23,8 +23,6 @@ const Sidebar = () => {
   } = useSelector((state) => state.auth);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  console.log(authStatus);
-
   useEffect(() => {
     if (authStatus === 'signed_out' || authStatus === 'signed_out_failed') dispatch(resetState());
     if (authStatus === 'signed_out') {
