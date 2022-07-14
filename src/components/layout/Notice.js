@@ -11,9 +11,13 @@ const Notice = ({ message }) => {
     }, 'Remove notice');
   }, []);
 
+<<<<<<< Updated upstream
   useEffect(() => {
     setShow(true);
   }, [message]);
+=======
+  console.log(message);
+>>>>>>> Stashed changes
 
   return (
     <Alert show={show} onClose={() => setShow(false)} variant="primary" dismissible className="notice m-0">
