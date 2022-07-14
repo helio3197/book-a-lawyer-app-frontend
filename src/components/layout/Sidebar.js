@@ -26,11 +26,11 @@ const Sidebar = () => {
   console.log(authStatus);
 
   useEffect(() => {
-    if (authStatus === 'signed_out' || authStatus === 'failed') dispatch(resetState());
+    if (authStatus === 'signed_out' || authStatus === 'signed_out_failed') dispatch(resetState());
     if (authStatus === 'signed_out') {
       navigate('/', { state: { notice: 'You have signed out successfully' } });
     }
-    if (authStatus === 'failed') {
+    if (authStatus === 'signed_out_failed') {
       navigate('/', { state: { notice: `Something went wrong: ${authError}` } });
     }
   }, [authStatus]);

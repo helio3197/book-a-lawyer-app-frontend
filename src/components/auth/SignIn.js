@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { signIn, resetState } from '../../redux/auth/auth';
 
 const SignIn = () => {
@@ -14,8 +15,7 @@ const SignIn = () => {
   const authState = useSelector((state) => state.auth);
   const [formState, setFormState] = useState(formInitialState);
   const dispatch = useDispatch();
-
-  // console.log(authState); // debugging, will remove later
+  const navigate = useNavigate();
 
   useEffect(() => () => dispatch(resetState()), []);
 
@@ -26,22 +26,14 @@ const SignIn = () => {
         password: '',
       }));
     }
-  }, [authState.status]);
-
-  if (authState.userSignedIn) {
-    if (authState.status === 'idle') {
-      return ( // Should redirect to homepage with respective notice: User already signed in
-        <div>
-          <h1>(PLACEHOLDER) Already signed_in, redirecting to home</h1>
-        </div>
-      );
+    if (authState.userSignedIn) {
+      if (authState.status === 'success') {
+        navigate('/', { state: { notice: 'Sign in successfully' } });
+      } else {
+        navigate('/', { state: { notice: 'You are already signed in!' } });
+      }
     }
-    return ( // Should redirect to homepage with respective notice: User registered successfully
-      <div>
-        <h1>(PLACEHOLDER) Success, should redirect to home</h1>
-      </div>
-    );
-  }
+  }, [authState.status]);
 
   const inputHandler = (e) => {
     const key = e.target.id;
@@ -65,7 +57,7 @@ const SignIn = () => {
     <Container fluid="sm" className="h-100 d-flex">
       <Container fluid className="py-3 border rounded form-width-sm shadow my-auto">
         <h1 className="text-center">Log In</h1>
-        <Form className="mb-2">
+        <Form className="mb-2 position-relative">
           <Form.Group controlId="email" className="mb-2">
             <Form.Label visuallyHidden>Email</Form.Label>
             <Form.Control value={formState.email} onChange={inputHandler} type="email" placeholder="Email" isInvalid={authState.error} />
@@ -81,6 +73,14 @@ const SignIn = () => {
           >
             Sign In
           </Button>
+          {authState.status === 'fetching'
+            && (
+              <div className="signout-loading">
+                <Spinner animation="border" variant="primary" role="status" className="my-auto">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
         </Form>
         <p className="m-0 text-center">
           Don&apos;t have an account?

@@ -4,6 +4,7 @@ const API_SIGNOUT_ENDPOINT = `${process.env.REACT_APP_API_HOST}/users/sign_out`;
 const REQUEST_STARTED = 'book-a-lawyer/auth/REQUEST_STARTED';
 const SIGNOUT_STARTED = 'book-a-lawyer/auth/SIGNOUT_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/auth/REQUEST_FAILED';
+const SIGNOUT_FAILED = 'book-a-lawyer/auth/SIGNOUT_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
 const SIGNOUT_COMPLETED = 'book-a-lawyer/auth/SIGNOUT_COMPLETED';
 const RESET_STATE = 'book-a-lawyer/auth/RESET_STATE';
@@ -33,6 +34,7 @@ const reducer = (state = initialState(), action) => {
         ...action.payload,
       };
     case REQUEST_FAILED:
+    case SIGNOUT_FAILED:
       return {
         ...state,
         ...action.payload,
@@ -77,6 +79,14 @@ const requestFailed = (error) => ({
   type: REQUEST_FAILED,
   payload: {
     status: 'failed',
+    error,
+  },
+});
+
+const signoutRequestFailed = (error) => ({
+  type: SIGNOUT_FAILED,
+  payload: {
+    status: 'signed_out_failed',
     error,
   },
 });
@@ -163,7 +173,7 @@ export const signOut = () => async (dispatch, getState) => {
 
     dispatch(signoutRequestCompleted());
   } catch (error) {
-    dispatch(requestFailed(error));
+    dispatch(signoutRequestFailed(error));
   }
 };
 
