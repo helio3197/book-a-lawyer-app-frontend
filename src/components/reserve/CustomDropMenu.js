@@ -20,7 +20,7 @@ const customMenu = ({
         onChange={(e) => setValue(e.target.value)}
         value={value}
       />
-      <ul className="list-unstyled">
+      <ul className="list-unstyled m-0">
         {React.Children.toArray(children).filter(
           (child) => !value || child.props.id.toLowerCase().startsWith(value.toLowerCase()),
         )}
