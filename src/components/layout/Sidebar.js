@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Nav from 'react-bootstrap/Nav';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -20,6 +21,7 @@ const Sidebar = () => {
     status: authStatus,
     error: authError,
   } = useSelector((state) => state.auth);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   console.log(authStatus);
 
@@ -36,34 +38,43 @@ const Sidebar = () => {
   const navActive = ({ isActive }) => (isActive ? { backgroundColor: 'greenyellow', color: 'white' } : {});
 
   const signoutHandler = () => {
+    setShowSidebar((state) => !state);
     dispatch(signOut());
   };
 
+  const navLinkHelper = ({
+    href, children, onClick,
+  }) => (
+    <NavLink className="link-item" style={navActive} to={href} onClick={onClick}>
+      {children}
+    </NavLink>
+  );
+
   const navLinksNotSignedIn = () => (
     <>
-      <NavLink to="/sign_up" style={navActive} className="link-item">
+      <Nav.Link as={navLinkHelper} href="/sign_up">
         SIGN UP
-      </NavLink>
-      <NavLink to="/sign_in" style={navActive} className="link-item">
+      </Nav.Link>
+      <Nav.Link as={navLinkHelper} href="/sign_in">
         SIGN IN
-      </NavLink>
+      </Nav.Link>
     </>
   );
 
   const navLinks = () => (
     <>
-      <NavLink to="/" style={navActive} className="link-item">
+      <Nav.Link href="/" as={navLinkHelper}>
         LAWYERS
-      </NavLink>
-      <NavLink to="/reserve" style={navActive} className="link-item">
+      </Nav.Link>
+      <Nav.Link href="/reserve" as={navLinkHelper}>
         BOOK A LAWYER
-      </NavLink>
-      <NavLink to="/reservations" style={navActive} className="link-item">
+      </Nav.Link>
+      <Nav.Link href="/reservations" as={navLinkHelper}>
         MY RESERVATIONS
-      </NavLink>
-      <NavLink to="/account" style={navActive} className="link-item">
+      </Nav.Link>
+      <Nav.Link href="/account" as={navLinkHelper}>
         MY ACCOUNT
-      </NavLink>
+      </Nav.Link>
       <Button type="button" onClick={signoutHandler} className="link-item btn btn-link bg-transparent border-0 text-start">
         SIGN OUT
       </Button>
@@ -72,12 +83,12 @@ const Sidebar = () => {
 
   return (
     <header className="sidebar">
-      <Navbar expand="lg">
+      <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
         <Navbar.Offcanvas id="offcanvasNavbar-expand">
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
-              <Link to="/" className="text-reset logo">
+              <Link to="/" className="text-reset logo" onClick={() => setShowSidebar((state) => !state)}>
                 The Lawyers
               </Link>
             </Offcanvas.Title>
@@ -86,7 +97,7 @@ const Sidebar = () => {
             <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
               The Lawyers
             </Link>
-            <div className="navbar-links position-relative">
+            <Nav className="navbar-links position-relative flex-column">
               {authState ? navLinks() : navLinksNotSignedIn()}
               {authStatus === 'fetching_signout'
                 && (
@@ -96,7 +107,7 @@ const Sidebar = () => {
                     </Spinner>
                   </div>
                 )}
-            </div>
+            </Nav>
             <div className="mt-auto ms-2">
               <ul className="list-unstyled d-flex social-icons gap-3">
                 <li className="text-secondary">

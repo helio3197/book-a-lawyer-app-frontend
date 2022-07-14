@@ -49,6 +49,15 @@
   flex-direction: column;
   gap: 6px;
   margin-top: 4rem;
+
+  @media (max-width: 375px) {
+    margin-top: 2rem;
+
+    .link-item {
+      padding: 7px 7px 7px 15px;
+      font-size: 1.3rem;
+    }
+  }
 }
 
 .link-item {
