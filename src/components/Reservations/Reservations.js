@@ -7,10 +7,10 @@ const Reservations = () => {
   const reservationState = useSelector((state) => state.reservations);
 
   useEffect(() => {
-    // if (reservationState !== 'completed') {
-    dispatch(fechReservations());
-    console.log(reservationState);
-    // }
+    if (reservationState.statusReservations !== 'completed') {
+      dispatch(fechReservations());
+      console.log(reservationState);
+    }
   }, []);
   // console.log(reservationState);
   return (
