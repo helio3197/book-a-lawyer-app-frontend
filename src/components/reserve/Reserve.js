@@ -58,7 +58,7 @@ const Reserve = () => {
     return (
       <Button type="button" variant="secondary" className="d-flex align-items-center gap-2" onClick={clickHandler}>
         <img src={lawyerToRemove.avatar_url} alt={lawyerToRemove.name} style={{ width: '40px', height: '40px' }} className="lawyer-thumbnail" />
-        <p className="m-0 text-truncate">{lawyerToRemove.name}</p>
+        <p className="m-0 text-truncate">{`${lawyerToRemove.name} | $${lawyerToRemove.rates}/hr`}</p>
         <IoClose className="text-light fs-4" />
       </Button>
     );
@@ -85,7 +85,7 @@ const Reserve = () => {
                   {lawyers?.map((lawyer, index) => (
                     <Dropdown.Item eventKey={index + 1} data-lawyerid={lawyer.id} key={lawyer.id} id={lawyer.name} className="d-flex gap-2 align-items-center">
                       <img src={lawyer.avatar_url} alt={lawyer.name} className="lawyer-thumbnail" />
-                      <p className="m-0 text-truncate">{lawyer.name}</p>
+                      <p className="m-0 text-truncate">{`${lawyer.name} | $${lawyer.rates}/hr`}</p>
                     </Dropdown.Item>
                   ))}
                   {lawyersState.status === 'fetching'
