@@ -11,6 +11,10 @@ const Notice = ({ message }) => {
     }, 'Remove notice');
   }, []);
 
+  useEffect(() => {
+    setShow(true);
+  }, [message]);
+
   return (
     <Alert show={show} onClose={() => setShow(false)} variant="primary" dismissible className="notice m-0">
       <p className="m-0">{message}</p>
