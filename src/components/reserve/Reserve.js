@@ -12,11 +12,13 @@ import { IoClose } from 'react-icons/io5';
 import 'react-datepicker/dist/react-datepicker.css';
 import CustomDropMenu from './CustomDropMenu';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
+import { createReservation } from '../../redux/reservations/reservationsCreate';
 
 const Reserve = () => {
   const [params] = useSearchParams();
   const selectedLawyer = params.get('lawyer');
   const lawyersState = useSelector((state) => state.lawyers);
+  const reservationState = useSelector((state) => state.reservations_create);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,10 +29,12 @@ const Reserve = () => {
     lawyer_id: selectedLawyer,
     reservationdate: null,
     duration: '',
+    is_active: true,
   };
   const [reservationData, setReservationData] = useState(initialReservationData);
 
   console.log(reservationData);
+  console.log(reservationState);
 
   useEffect(() => {
     if (lawyersState.status === 'failed') {
@@ -94,6 +98,11 @@ const Reserve = () => {
     }
 
     return '';
+  };
+
+  const formHandler = (e) => {
+    e.preventDefault();
+    dispatch(createReservation(JSON.stringify(reservationData)));
   };
 
   return (
@@ -174,7 +183,7 @@ const Reserve = () => {
                 placeholder="N/A"
               />
             </InputGroup>
-            <Button className="px-4 text-light fw-bold">
+            <Button className="px-4 text-light fw-bold" onClick={formHandler}>
               Book Now
             </Button>
           </div>
