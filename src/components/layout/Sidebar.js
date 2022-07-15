@@ -80,7 +80,7 @@ const Sidebar = () => {
   );
 
   return (
-    <header className="sidebar">
+    <header className="sidebar bg-light">
       <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
         <Navbar.Offcanvas id="offcanvasNavbar-expand">

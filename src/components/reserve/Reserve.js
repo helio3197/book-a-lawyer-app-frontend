@@ -33,14 +33,20 @@ const Reserve = () => {
   };
   const [reservationData, setReservationData] = useState(initialReservationData);
 
-  console.log(reservationData);
-  console.log(reservationState);
-
   useEffect(() => {
     if (lawyersState.status === 'failed') {
-      navigate(`${location.pathname}${location.search}`, { status: { notice: `Something went wrong: ${lawyersState.error}` } });
+      navigate(`${location.pathname}${location.search}`, { state: { notice: `Something went wrong: ${lawyersState.error}` } });
     }
   }, [lawyersState.status]);
+
+  useEffect(() => {
+    if (reservationState.status === 'success') {
+      navigate('/', { state: { notice: 'Reservation created successfully!' } });
+    }
+    if (typeof reservationState.error === 'string') {
+      navigate(`${location.pathname}${location.search}`, { state: { notice: `Something went wrong: ${reservationState.error}` } });
+    }
+  }, [reservationState.status]);
 
   useEffect(() => {
     if (lawyersState.status !== 'completed') {
@@ -113,7 +119,7 @@ const Reserve = () => {
   return (
     <Container fluid className="h-100 reserve-bg d-flex">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
-        <Form className="reserve-form position-relative">
+        <Form className={reservationState.status === 'fetching' ? 'reserve-form position-relative' : 'reserve-form'}>
           <div className="mb-2">
             {(reservationData.lawyer_id && lawyers)
               ? removeSelectedLawyer(reservationData.lawyer_id)
