@@ -3,7 +3,7 @@ const REQUEST_STARTED = 'book-a-lawyer/reservations/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/reservations/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/reservations/REQUEST_COMPLETED';
 const initialState = {
-  status: 'idle',
+  reservations: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,11 +43,11 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestCompleted = ({ reservation }) => ({
+const requestCompleted = ({ reservations }) => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'completed',
-    reservation,
+    reservations,
   },
 });
 
@@ -60,7 +60,7 @@ export const fechReservations = () => async (dispatch, getState) => {
         Authorization: authToken,
       },
     });
-    console.log(await response.json());
+    // console.log(await response.json());
     if (!response.ok) {
       throw (await response.json()).error;
     }
