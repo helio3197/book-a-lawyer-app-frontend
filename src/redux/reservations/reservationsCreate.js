@@ -2,6 +2,7 @@ const API_RESERVATIONS_CREATE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/
 const REQUEST_STARTED = 'book-a-lawyer/lawyersCreate/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/lawyersCreate/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/lawyersCreate/REQUEST_COMPLETED';
+const RESET_STATE = 'book-a-lawyer/lawyersCreate/RESET_STATE';
 const initialState = {
   status: 'idle',
 };
@@ -11,6 +12,10 @@ const reducer = (state = initialState, action) => {
     case REQUEST_STARTED:
       return action.payload;
     case REQUEST_FAILED:
+      return action.payload;
+    case REQUEST_COMPLETED:
+      return action.payload;
+    case RESET_STATE:
       return action.payload;
     default:
       return state;
@@ -36,6 +41,13 @@ const requestCompleted = () => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'success',
+  },
+});
+
+export const resetCreateReservationState = () => ({
+  type: RESET_STATE,
+  payload: {
+    status: 'idle',
   },
 });
 
