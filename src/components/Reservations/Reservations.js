@@ -36,11 +36,13 @@ const Reservations = () => {
           <div className="reservationdeatails">
             <div>
               <p>Lawyers Name</p>
-              <p>Reserve Date</p>
+              <p>Reservation Date</p>
+              <p>Reservation Time</p>
             </div>
             <div>
               <p>{reserve.id}</p>
-              <p>{reserve.name}</p>
+              <p>{reserve.reservationdate.substring(0, 10)}</p>
+              <p>{reserve.reservationdate.substring(11, 16)}</p>
             </div>
           </div>
           <div className="reservationbtns">
@@ -49,16 +51,6 @@ const Reservations = () => {
           </div>
         </div>
       ))}
-      {/* {reservationState.reservations.length ? <p>Working</p> : <p> Also Working</p>} */}
-      {/* <div className="reservationdeatails">
-          <p>Lawyers Name</p>
-          <p>Reserve Date</p>
-        </div>
-        <div className="reservationbtns">
-          <Button href="/" className="button-custom">Edit</Button>
-          <Button href="/">Delete</Button>
-        </div> */}
-      {/* </div> */}
     </section>
   );
 };
