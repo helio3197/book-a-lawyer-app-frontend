@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 import DatePicker from 'react-datepicker';
 import { IoClose } from 'react-icons/io5';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -25,6 +26,7 @@ const Reserve = () => {
   const initialReservationData = {
     lawyer_id: selectedLawyer,
     reservationdate: null,
+    duration: '',
   };
   const [reservationData, setReservationData] = useState(initialReservationData);
 
@@ -117,20 +119,39 @@ const Reserve = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
-          <DatePicker
-            selected={reservationData.reservationdate}
-            onChange={(date) => setReservationData((state) => ({
-              ...state, reservationdate: date.getHours() < 8 ? date.setHours(9) : date,
-            }))}
-            customInput={<CustomInput />}
-            minDate={new Date()}
-            showTimeSelect
-            dateFormat="MMMM d, yyyy h:mm aa"
-            placeholderText="Appointment date"
-            timeIntervals={60}
-            minTime={new Date().setHours(8)}
-            maxTime={new Date().setHours(17)}
-          />
+          <div className="d-flex gap-2 flex-wrap">
+            <DatePicker
+              selected={reservationData.reservationdate}
+              onChange={(date) => setReservationData((state) => ({
+                ...state, reservationdate: date.getHours() < 8 ? date.setHours(9) : date,
+              }))}
+              customInput={<CustomInput />}
+              minDate={new Date()}
+              showTimeSelect
+              dateFormat="MMMM d, yyyy h:mm aa"
+              placeholderText="Appointment date"
+              timeIntervals={60}
+              minTime={new Date().setHours(8)}
+              maxTime={new Date().setHours(17)}
+              wrapperClassName="flex-grow-1"
+            />
+            <InputGroup className="flex-grow-1" style={{ width: '150px' }}>
+              <Form.Select
+                value={reservationData.duration}
+                onChange={(e) => setReservationData((state) => ({
+                  ...state,
+                  duration: e.target.value,
+                }))}
+              >
+                <option value="">Duration</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </Form.Select>
+              <InputGroup.Text>Hours</InputGroup.Text>
+            </InputGroup>
+          </div>
         </Form>
       </Container>
     </Container>
