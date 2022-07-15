@@ -61,10 +61,10 @@ const Reserve = () => {
     const clickHandler = () => setReservationData((state) => ({ ...state, lawyer_id: null }));
 
     return (
-      <Button type="button" variant="secondary" className="d-flex align-items-center gap-2 mb-2" onClick={clickHandler}>
+      <Button type="button" variant="secondary" className="d-flex align-items-center gap-2 mb-2 py-1 w-100" onClick={clickHandler}>
         <img src={lawyerToRemove.avatar_url} alt={lawyerToRemove.name} style={{ width: '35px', height: '35px' }} className="lawyer-thumbnail" />
         <p className="m-0 text-truncate">{`${lawyerToRemove.name} | $${lawyerToRemove.rates}/hr`}</p>
-        <IoClose className="text-light fs-4" />
+        <IoClose className="text-light fs-4 ms-auto" />
       </Button>
     );
   };
@@ -83,6 +83,19 @@ const Reserve = () => {
 
   const CustomInput = React.forwardRef(datePickerCustomInput);
 
+  const totalOutputHandler = () => {
+    if (lawyers) {
+      if (reservationData.lawyer_id) {
+        if (reservationData.duration) {
+          return `$${lawyers.find((lawyer) => lawyer.id === +reservationData.lawyer_id)
+            .rates * reservationData.duration}`;
+        }
+      }
+    }
+
+    return '';
+  };
+
   return (
     <Container fluid className="h-100 reserve-bg d-flex">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
@@ -98,7 +111,7 @@ const Reserve = () => {
                 }))}
                 className="mb-2"
               >
-                <Dropdown.Toggle>
+                <Dropdown.Toggle variant="secondary">
                   Select lawyer
                 </Dropdown.Toggle>
                 <Dropdown.Menu as={CustomDropMenu}>
@@ -119,7 +132,7 @@ const Reserve = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
-          <div className="d-flex gap-2 flex-wrap">
+          <div className="d-flex gap-2 flex-wrap mb-2">
             <DatePicker
               selected={reservationData.reservationdate}
               onChange={(date) => setReservationData((state) => ({
@@ -151,6 +164,19 @@ const Reserve = () => {
               </Form.Select>
               <InputGroup.Text>Hours</InputGroup.Text>
             </InputGroup>
+          </div>
+          <div className="d-flex flex-wrap gap-2">
+            <InputGroup className="w-auto flex-grow-1">
+              <InputGroup.Text>Total:</InputGroup.Text>
+              <Form.Control
+                value={totalOutputHandler()}
+                readOnly
+                placeholder="N/A"
+              />
+            </InputGroup>
+            <Button className="px-4 text-light fw-bold">
+              Book Now
+            </Button>
           </div>
         </Form>
       </Container>
