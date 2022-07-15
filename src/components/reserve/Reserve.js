@@ -6,7 +6,9 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
+import DatePicker from 'react-datepicker';
 import { IoClose } from 'react-icons/io5';
+import 'react-datepicker/dist/react-datepicker.css';
 import CustomDropMenu from './CustomDropMenu';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
@@ -22,6 +24,7 @@ const Reserve = () => {
   const [dropdownPosition, setDropdownPosition] = useState(mediaQuerySm.matches ? 'end' : 'down');
   const initialReservationData = {
     lawyer_id: selectedLawyer,
+    reservationdate: null,
   };
   const [reservationData, setReservationData] = useState(initialReservationData);
 
@@ -56,13 +59,27 @@ const Reserve = () => {
     const clickHandler = () => setReservationData((state) => ({ ...state, lawyer_id: null }));
 
     return (
-      <Button type="button" variant="secondary" className="d-flex align-items-center gap-2" onClick={clickHandler}>
-        <img src={lawyerToRemove.avatar_url} alt={lawyerToRemove.name} style={{ width: '40px', height: '40px' }} className="lawyer-thumbnail" />
+      <Button type="button" variant="secondary" className="d-flex align-items-center gap-2 mb-2" onClick={clickHandler}>
+        <img src={lawyerToRemove.avatar_url} alt={lawyerToRemove.name} style={{ width: '35px', height: '35px' }} className="lawyer-thumbnail" />
         <p className="m-0 text-truncate">{`${lawyerToRemove.name} | $${lawyerToRemove.rates}/hr`}</p>
         <IoClose className="text-light fs-4" />
       </Button>
     );
   };
+
+  const datePickerCustomInput = ({
+    value, onClick, onChange, placeholder,
+  }, ref) => (
+    <Form.Control
+      value={value}
+      onClick={onClick}
+      ref={ref}
+      onChange={onChange}
+      placeholder={placeholder}
+    />
+  );
+
+  const CustomInput = React.forwardRef(datePickerCustomInput);
 
   return (
     <Container fluid className="h-100 reserve-bg d-flex">
@@ -77,6 +94,7 @@ const Reserve = () => {
                   ...state,
                   lawyer_id: e.currentTarget.dataset.lawyerid,
                 }))}
+                className="mb-2"
               >
                 <Dropdown.Toggle>
                   Select lawyer
@@ -99,6 +117,20 @@ const Reserve = () => {
                 </Dropdown.Menu>
               </Dropdown>
             )}
+          <DatePicker
+            selected={reservationData.reservationdate}
+            onChange={(date) => setReservationData((state) => ({
+              ...state, reservationdate: date.getHours() < 8 ? date.setHours(9) : date,
+            }))}
+            customInput={<CustomInput />}
+            minDate={new Date()}
+            showTimeSelect
+            dateFormat="MMMM d, yyyy h:mm aa"
+            placeholderText="Appointment date"
+            timeIntervals={60}
+            minTime={new Date().setHours(8)}
+            maxTime={new Date().setHours(17)}
+          />
         </Form>
       </Container>
     </Container>
