@@ -2,15 +2,32 @@
     margin-top: 60px;
 }
 
+.lawyer-pic {
+    // width: 50%;
+    height: 100px;
+    // text-align: center;
+    margin: 10px auto;
+}
+
+.allinclusive { 
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;  
+    box-shadow: 5px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    border: 2px solid black;  
+    box-shadow: 5px rgba(0, 0, 0, 0.2);
+}
+
 .reservation {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 78%;
+    // width: 78%;
     margin: 10px auto;
-    border: 2px solid black;  
-    box-shadow: 5px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    // border: 2px solid black;  
+    // box-shadow: 5px rgba(0, 0, 0, 0.2);
+    // padding: 10px;
 }
 
 .reservationbtns {
@@ -27,9 +44,10 @@
 
 }
 
-.button {
-    width: 40% !important;
-}
+.reservationbtns button {
+    width: 60%;
+    margin-right: 10px;
+    }
 
 @media screen and (min-width: 700px) {
     .allinclusive { 
