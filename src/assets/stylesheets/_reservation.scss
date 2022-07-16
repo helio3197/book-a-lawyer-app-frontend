@@ -2,7 +2,6 @@
     margin-top: 60px;
 }
 
-
 .reservation {
     display: flex;
     flex-direction: column;
@@ -23,7 +22,7 @@
 .reservationdeatails {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin: auto;
 
 }
@@ -33,9 +32,27 @@
 }
 
 @media screen and (min-width: 700px) {
+    .allinclusive { 
+        display: flex;
+        border: 2px solid black;  
+        box-shadow: 5px rgba(0, 0, 0, 0.2);
+        margin: 10px;
+    }
+    .lawyer-pic {
+        width: 27%;
+        height: 180px;
+        margin-left: 10px;
+    }
+
     .reservation {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        margin-left: 0;
+        width: 60%;
+        
     }
 
     .reservationdeatails {
@@ -48,6 +65,12 @@
     .reservationbtns {
          flex-direction: column;
          justify-content: space-around;
+         width: 35%;
     }
+
+    .reservationbtns button {
+    margin: 15px 0 !important;
+    }
+
 }
 
