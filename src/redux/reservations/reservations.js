@@ -60,12 +60,31 @@ export const fechReservations = () => async (dispatch, getState) => {
         Authorization: authToken,
       },
     });
-    // console.log(await response.json());
     if (!response.ok) {
       throw (await response.json()).error;
     }
-    // console.log(await response.json());
     dispatch(requestCompleted(await response.json()));
+  } catch (error) {
+    dispatch(requestFailed(error));
+  }
+};
+
+export const deleteReservations = (id) => async (dispatch, getState) => {
+  dispatch(requestStarted());
+  try {
+    const { authToken } = getState().auth;
+    const response = await fetch(`${API_RESERVATIONS_INDEX_ENDPOINT}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'Application/json',
+        Authorization: authToken,
+      },
+    });
+    if (!response.ok) {
+      throw (await response.json()).error;
+    }
+
+    dispatch(requestCompleted());
   } catch (error) {
     dispatch(requestFailed(error));
   }

@@ -22,7 +22,6 @@
 
 .reservationdeatails {
     display: flex;
-    // flex-direction: column;
     justify-content: space-between;
     width: 80%;
     margin: auto;
@@ -32,3 +31,23 @@
 .button {
     width: 40% !important;
 }
+
+@media screen and (min-width: 700px) {
+    .reservation {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .reservationdeatails {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+        margin: 0;
+    }
+
+    .reservationbtns {
+         flex-direction: column;
+         justify-content: space-around;
+    }
+}
+
