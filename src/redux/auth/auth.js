@@ -8,6 +8,7 @@ const SIGNOUT_FAILED = 'book-a-lawyer/auth/SIGNOUT_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/auth/REQUEST_COMPLETED';
 const SIGNOUT_COMPLETED = 'book-a-lawyer/auth/SIGNOUT_COMPLETED';
 const RESET_STATE = 'book-a-lawyer/auth/RESET_STATE';
+const UPDATE_CURRENT_USER = 'book-a-lawyer/auth/UPDATE_CURRENT_USER';
 const initialState = () => {
   const auth = JSON.parse(localStorage.getItem('auth'));
   if (auth) {
@@ -49,6 +50,15 @@ const reducer = (state = initialState(), action) => {
         ...action.payload,
       };
     case RESET_STATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case UPDATE_CURRENT_USER:
+      localStorage.setItem('auth', JSON.stringify({
+        token: state.authToken,
+        user: action.payload.currentUser,
+      }));
       return {
         ...state,
         ...action.payload,
@@ -114,6 +124,13 @@ export const resetState = () => ({
   payload: {
     status: 'idle',
     error: undefined,
+  },
+});
+
+export const updateCurrentUser = (user) => ({
+  type: UPDATE_CURRENT_USER,
+  payload: {
+    currentUser: user,
   },
 });
 

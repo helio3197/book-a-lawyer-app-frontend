@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import {
+  useSearchParams, useNavigate, useLocation, Navigate,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -17,6 +19,7 @@ import { createReservation, resetCreateReservationState } from '../../redux/rese
 const Reserve = () => {
   const [params] = useSearchParams();
   const selectedLawyer = params.get('lawyer');
+  const { userSignedIn } = useSelector((state) => state.auth);
   const lawyersState = useSelector((state) => state.lawyers);
   const reservationState = useSelector((state) => state.reservations_create);
   const dispatch = useDispatch();
@@ -66,6 +69,10 @@ const Reserve = () => {
       dispatch(resetCreateReservationState());
     };
   }, []);
+
+  if (!userSignedIn) {
+    return <Navigate to="/sign_in" state={{ notice: 'You need to sign in or sign up before continuing.' }} />;
+  }
 
   const removeSelectedLawyer = (id) => {
     const lawyerToRemove = lawyers.find((lawyer) => lawyer.id === +id);
@@ -117,7 +124,7 @@ const Reserve = () => {
   };
 
   return (
-    <Container fluid className="h-100 reserve-bg d-flex">
+    <Container fluid className="h-100 reserve-bg d-flex py-2 overflow-auto">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
         <Form className={reservationState.status === 'fetching' ? 'reserve-form position-relative' : 'reserve-form'}>
           <div className="mb-2">

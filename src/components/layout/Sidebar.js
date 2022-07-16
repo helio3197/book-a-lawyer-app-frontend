@@ -80,7 +80,7 @@ const Sidebar = () => {
   );
 
   return (
-    <header className="sidebar bg-light">
+    <header className="sidebar">
       <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
         <Navbar.Offcanvas id="offcanvasNavbar-expand">
@@ -91,7 +91,7 @@ const Sidebar = () => {
               </Link>
             </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column">
+          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column bg-light">
             <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
               The Lawyers
             </Link>
