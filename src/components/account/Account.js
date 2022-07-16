@@ -8,11 +8,13 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { GrFormClose } from 'react-icons/gr';
 import { updateUser, resetUpdateUserState } from '../../redux/users/usersEdit';
-import { updateCurrentUser } from '../../redux/auth/auth';
+import { destroyUser, resetDestroyUserState } from '../../redux/users/usersDestroy';
+import { updateCurrentUser, signOut } from '../../redux/auth/auth';
 import defaultAvatar from '../../assets/images/profile-pic.png';
 
 const Account = () => {
   const userState = useSelector((state) => state.users_edit);
+  const userDeleteState = useSelector((state) => state.users_destroy);
   const { userSignedIn, currentUser } = useSelector((state) => state.auth);
   const formInitialState = {
     name: currentUser?.name,
@@ -28,6 +30,7 @@ const Account = () => {
     },
   };
   const [formState, setFormState] = useState(formInitialState);
+  const [showCancelAccount, setShowCancelAccount] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,11 +38,18 @@ const Account = () => {
     if (typeof userState.error === 'string') {
       navigate('/account', { state: { notice: `Something went wrong: ${userState.error}` } });
     }
+    if (userDeleteState.status === 'failed') {
+      navigate('/account', { state: { notice: `Something went wrong: ${userDeleteState.error}` } });
+    }
     if (userState.status === 'success') {
       navigate('/', { state: { notice: 'Account updated successfully.' } });
       dispatch(updateCurrentUser(userState.user));
     }
-  }, [userState.status]);
+    if (userDeleteState.status === 'success') {
+      navigate('/account', { state: { notice: 'Account canceled successfully.' } });
+      dispatch(signOut());
+    }
+  }, [userState.status, userDeleteState.status]);
 
   useEffect(() => {
     if (!userSignedIn) {
@@ -47,6 +57,7 @@ const Account = () => {
     }
     return () => {
       dispatch(resetUpdateUserState());
+      dispatch(resetDestroyUserState());
     };
   }, []);
 
@@ -172,10 +183,27 @@ const Account = () => {
           <Button
             type="submit"
             onClick={formHandler}
+            className="text-light fw-bold px-4"
           >
             Update
           </Button>
-          {userState.status === 'fetching'
+          {showCancelAccount
+            ? (
+              <p className="m-0 text-center">
+                Are you sure?
+                {' '}
+                <Button onClick={() => dispatch(destroyUser())} variant="primary" className="px-2 py-1 me-2">Yes</Button>
+                <Button onClick={() => setShowCancelAccount(false)} variant="secondary" className="px-2 py-1">No</Button>
+              </p>
+            )
+            : (
+              <p className="m-0 text-center">
+                Unhappy?
+                {' '}
+                <Button onClick={() => setShowCancelAccount(true)} variant="link" className="p-0">Cancel my account</Button>
+              </p>
+            )}
+          {(userState.status === 'fetching' || userDeleteState.status === 'fetching')
             && (
               <div className="signout-loading">
                 <Spinner animation="border" variant="primary" role="status" className="my-auto">
