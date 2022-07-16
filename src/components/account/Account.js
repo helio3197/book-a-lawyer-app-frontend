@@ -35,6 +35,14 @@ const Account = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (userState.status === 'failed') {
+      setFormState((state) => ({
+        ...state,
+        password: '',
+        password_confirmation: '',
+        current_password: '',
+      }));
+    }
     if (typeof userState.error === 'string') {
       navigate('/account', { state: { notice: `Something went wrong: ${userState.error}` } });
     }
