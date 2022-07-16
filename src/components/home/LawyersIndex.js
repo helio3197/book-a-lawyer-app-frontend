@@ -35,7 +35,7 @@ const LawyersIndex = () => {
   }
 
   return (
-    <Container as="section" fluid className="py-2 lawyers">
+    <Container as="section" fluid className="py-2 lawyers overflow-auto">
       <div className="my-auto">
         <div className="mt-3 mb-5">
           <h1 className="text-center">AVAILABLE LAWYERS</h1>

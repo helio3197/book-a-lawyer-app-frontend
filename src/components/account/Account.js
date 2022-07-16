@@ -1,51 +1,54 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { GrFormClose } from 'react-icons/gr';
-import { resetState, signUp } from '../../redux/auth/auth';
+import { updateUser, resetUpdateUserState } from '../../redux/users/usersEdit';
+import { updateCurrentUser } from '../../redux/auth/auth';
 import defaultAvatar from '../../assets/images/profile-pic.png';
 
-const SignUp = () => {
+const Account = () => {
+  const userState = useSelector((state) => state.users_edit);
+  const { userSignedIn, currentUser } = useSelector((state) => state.auth);
   const formInitialState = {
-    name: '',
-    email: '',
-    phone: '',
+    name: currentUser?.name,
+    email: currentUser?.email,
+    phone: currentUser?.phone,
     password: '',
     password_confirmation: '',
+    current_password: '',
     avatar: {
       value: '',
-      preview: defaultAvatar,
+      preview: currentUser?.avatar || defaultAvatar,
       file: null,
     },
   };
-  const authState = useSelector((state) => state.auth);
   const [formState, setFormState] = useState(formInitialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => () => dispatch(resetState()), []);
+  useEffect(() => {
+    if (typeof userState.error === 'string') {
+      navigate('/account', { state: { notice: `Something went wrong: ${userState.error}` } });
+    }
+    if (userState.status === 'success') {
+      navigate('/', { state: { notice: 'Account updated successfully.' } });
+      dispatch(updateCurrentUser(userState.user));
+    }
+  }, [userState.status]);
 
   useEffect(() => {
-    if (authState.status === 'failed' && (formState.password || formState.password_confirmation)) {
-      setFormState((state) => ({
-        ...state,
-        password: '',
-        password_confirmation: '',
-      }));
+    if (!userSignedIn) {
+      navigate('/sign_in', { state: { notice: 'You need to sign in or sign up before continuing.' } });
     }
-    if (authState.userSignedIn) {
-      if (authState.status === 'success') {
-        navigate('/', { state: { notice: 'Account created successfully' } });
-      } else {
-        navigate('/', { state: { notice: 'You are already signed in!' } });
-      }
-    }
-  }, [authState.status]);
+    return () => {
+      dispatch(resetUpdateUserState());
+    };
+  }, []);
 
   const removeSelectedPicture = () => {
     setFormState((state) => ({
@@ -64,6 +67,7 @@ const SignUp = () => {
           preview: URL.createObjectURL(file),
           file,
         },
+        remove_avatar: '',
       }));
       return undefined;
     }
@@ -71,6 +75,16 @@ const SignUp = () => {
     removeSelectedPicture();
     return undefined;
   };
+
+  const removeCurrentAvatar = () => setFormState((state) => ({
+    ...state,
+    avatar: {
+      value: '',
+      preview: defaultAvatar,
+      file: null,
+    },
+    remove_avatar: true,
+  }));
 
   const inputHandler = (e) => {
     const key = e.target.id;
@@ -90,16 +104,16 @@ const SignUp = () => {
       form.append('user[avatar]', formState.avatar.file);
     }
 
-    dispatch(signUp(form));
+    dispatch(updateUser(form));
   };
 
-  const renderError = (key) => `${key} ${authState.error?.[key]?.join(', ')}`;
-  const validateInput = (key) => !!authState.error?.[key];
+  const renderError = (key) => `${key} ${userState.error?.[key]?.join(', ')}`;
+  const validateInput = (key) => !!userState.error?.[key];
 
   return (
-    <Container fluid="sm" className="h-100 d-flex py-2 overflow-auto">
-      <Container fluid className="py-3 border rounded form-width-sm shadow my-auto bg-light">
-        <h1 className="text-center">Create an account</h1>
+    <Container fluid className="h-100 reserve-bg d-flex py-2 overflow-auto">
+      <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
+        <h1 className="text-center">Edit Pofile</h1>
         <Form className="mb-2 position-relative">
           <div className="avatar mb-3">
             <div className="preview">
@@ -116,6 +130,8 @@ const SignUp = () => {
                   <GrFormClose />
                 </button>
               </div>
+              {(currentUser?.avatar === formState.avatar.preview && !formState.avatar.file)
+                && <Button variant="link" size="sm" className="p-0" onClick={removeCurrentAvatar}>Remove profile picture</Button>}
               <Form.Control.Feedback type="invalid" className={validateInput('avatar') ? 'd-block' : ''}>{renderError('avatar')}</Form.Control.Feedback>
             </div>
           </div>
@@ -135,8 +151,10 @@ const SignUp = () => {
             <Form.Control.Feedback type="invalid">{renderError('phone')}</Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password" className="mb-2">
-            <Form.Label visuallyHidden>Password</Form.Label>
-            <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password" isInvalid={validateInput('password')} />
+            <Form.Label visuallyHidden>
+              Password (leave blank if you don&apos;t want to change it)
+            </Form.Label>
+            <Form.Control value={formState.password} onChange={inputHandler} type="password" placeholder="Password (leave blank if you don't want to change it)" isInvalid={validateInput('password')} />
             <Form.Control.Feedback type="invalid">{renderError('password')}</Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password_confirmation" className="mb-2">
@@ -144,13 +162,20 @@ const SignUp = () => {
             <Form.Control value={formState.password_confirmation} onChange={inputHandler} type="password" placeholder="Confirm password" isInvalid={validateInput('password_confirmation')} />
             <Form.Control.Feedback type="invalid">{renderError('password_confirmation')}</Form.Control.Feedback>
           </Form.Group>
+          <Form.Group controlId="current_password" className="mb-2">
+            <Form.Label visuallyHidden>
+              Current Password (we need your current password to confirm your changes)
+            </Form.Label>
+            <Form.Control value={formState.current_password} onChange={inputHandler} type="password" placeholder="Current Password (we need your current password to confirm your changes)" isInvalid={validateInput('current_password')} />
+            <Form.Control.Feedback type="invalid">{renderError('current_password')}</Form.Control.Feedback>
+          </Form.Group>
           <Button
             type="submit"
             onClick={formHandler}
           >
-            Sign Up
+            Update
           </Button>
-          {authState.status === 'fetching'
+          {userState.status === 'fetching'
             && (
               <div className="signout-loading">
                 <Spinner animation="border" variant="primary" role="status" className="my-auto">
@@ -159,14 +184,9 @@ const SignUp = () => {
               </div>
             )}
         </Form>
-        <p className="m-0 text-center">
-          Have you already an account?
-          {' '}
-          <Link to="/sign_in">Log in</Link>
-        </p>
       </Container>
     </Container>
   );
 };
 
-export default SignUp;
+export default Account;

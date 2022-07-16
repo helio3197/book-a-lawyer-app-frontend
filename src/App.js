@@ -6,6 +6,7 @@ import Lawyer from './components/details/Details';
 import SignUp from './components/auth/SignUp';
 import SignIn from './components/auth/SignIn';
 import Reserve from './components/reserve/Reserve';
+import Account from './components/account/Account';
 
 const App = () => (
   <Router>
@@ -17,6 +18,7 @@ const App = () => (
         <Route path="sign_up" element={<SignUp />} />
         <Route path="sign_in" element={<SignIn />} />
         <Route path="reserve" element={<Reserve />} />
+        <Route path="account" element={<Account />} />
       </Route>
     </Routes>
   </Router>
