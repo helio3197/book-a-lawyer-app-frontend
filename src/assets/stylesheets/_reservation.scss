@@ -52,14 +52,15 @@
 @media screen and (min-width: 700px) {
     .allinclusive { 
         display: flex;
-        border: 2px solid black;  
+        border: 2px solid black; 
+        flex-direction: row; 
         box-shadow: 5px rgba(0, 0, 0, 0.2);
         margin: 10px;
     }
     .lawyer-pic {
-        width: 27%;
+        // width: 27%;
         height: 180px;
-        margin-left: 10px;
+        margin-left: auto
     }
 
     .reservation {
