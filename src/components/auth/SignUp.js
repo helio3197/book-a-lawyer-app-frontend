@@ -97,8 +97,8 @@ const SignUp = () => {
   const validateInput = (key) => !!authState.error?.[key];
 
   return (
-    <Container fluid="sm" className="h-100 d-flex py-2 overflow-auto">
-      <Container fluid className="py-3 border rounded form-width-sm shadow my-auto bg-light">
+    <Container fluid className="h-100 d-flex py-2 overflow-auto reserve-bg">
+      <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
         <h1 className="text-center">Create an account</h1>
         <Form className="mb-2 position-relative">
           <div className="avatar mb-3">
@@ -147,6 +147,7 @@ const SignUp = () => {
           <Button
             type="submit"
             onClick={formHandler}
+            className="text-light fw-bold px-4"
           >
             Sign Up
           </Button>
