@@ -2,11 +2,15 @@
     margin-top: 60px;
 }
 
-.lawyer-pic {
-    // width: 50%;
-    height: 100px;
-    // text-align: center;
-    margin: 10px auto;
+// .lawyer-pic {
+//     height: 100px;
+//     margin: 10px auto;
+// }
+
+.lawyer-thumb {
+    width: 40px;
+    height: 40px;
+    margin: auto;
 }
 
 .allinclusive { 
@@ -14,9 +18,10 @@
     flex-direction: column;
     border: 2px solid black;  
     box-shadow: 5px rgba(0, 0, 0, 0.2);
-    margin: 10px;
+    margin: 10px auto;
     border: 2px solid black;  
     box-shadow: 5px rgba(0, 0, 0, 0.2);
+    width: 70%;
 }
 
 .reservation {
@@ -55,7 +60,7 @@
         border: 2px solid black; 
         flex-direction: row; 
         box-shadow: 5px rgba(0, 0, 0, 0.2);
-        margin: 10px;
+        margin: 10px auto;
     }
     .lawyer-pic {
         // width: 27%;
@@ -70,7 +75,7 @@
         align-items: center;
         border: none;
         margin-left: 0;
-        width: 60%;
+        width: 100%;
         
     }
 
@@ -89,6 +94,12 @@
 
     .reservationbtns button {
     margin: 15px 0 !important;
+    }
+
+    .lawyer-thumb {
+        width: 40px;
+        height: 40px;
+        margin: auto;
     }
 
 }

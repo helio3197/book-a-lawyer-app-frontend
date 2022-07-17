@@ -25,8 +25,6 @@ const Reservations = () => {
     }
   }, []);
 
-  // console.log(reservationState);
-
   const deleteReservationData = (id) => () => {
     dispatch(deleteReservations(id));
   };
@@ -53,11 +51,11 @@ const Reservations = () => {
     <section className="reservationtop">
       {reservationState.reservations.map((reserve) => (
         <div key={reserve.id} className="allinclusive">
-          <img src={lawyersState.lawyers.filter((item) => item.id === reserve.lawyer_id)[0].avatar_url} alt="Profle" className="lawyer-pic" />
+          {/* <img src={lawyersState.lawyers.filter((item) => item.id === reserve.lawyer_id)[0].avatar_url} alt="Profle" className="lawyer-pic" /> */}
           <div key={reserve.id} className="reservation">
             <div className="reservationdeatails">
               <div>
-                <p>Lawyers Name</p>
+                <img src={lawyersState.lawyers.filter((item) => item.id === reserve.lawyer_id)[0].avatar_url} alt="Profle" className="lawyer-thumb" />
                 <p>Reservation Date</p>
                 <p>Reservation Time</p>
                 <p>Reservation Duration</p>
