@@ -33,7 +33,7 @@ const Sidebar = () => {
     }
   }, [authStatus]);
 
-  const navActive = ({ isActive }) => (isActive ? { backgroundColor: 'greenyellow', color: 'white' } : {});
+  const navActive = ({ isActive }) => (isActive ? { backgroundColor: '#96bf01', color: 'white' } : {});
 
   const signoutHandler = () => {
     setShowSidebar((state) => !state);
@@ -91,7 +91,7 @@ const Sidebar = () => {
               </Link>
             </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column">
+          <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column bg-light">
             <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
               The Lawyers
             </Link>

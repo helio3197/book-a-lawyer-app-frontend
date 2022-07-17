@@ -54,8 +54,8 @@ const SignIn = () => {
   };
 
   return (
-    <Container fluid="sm" className="h-100 d-flex">
-      <Container fluid className="py-3 border rounded form-width-sm shadow my-auto">
+    <Container fluid className="h-100 d-flex py-2 overflow-auto reserve-bg">
+      <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
         <h1 className="text-center">Log In</h1>
         <Form className="mb-2 position-relative">
           <Form.Group controlId="email" className="mb-2">
@@ -70,6 +70,7 @@ const SignIn = () => {
           <Button
             type="submit"
             onClick={formHandler}
+            className="text-light fw-bold px-4"
           >
             Sign In
           </Button>

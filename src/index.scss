@@ -1,3 +1,6 @@
+$soft-white: #e3e3e3;
+$primary: #96bf01;
+
 @import '~bootstrap/scss/bootstrap.scss';
 @import 'App';
 @import 'assets/stylesheets/forms';
@@ -5,3 +8,4 @@
 @import 'assets/stylesheets/Home';
 @import 'assets/stylesheets/details';
 @import 'assets/stylesheets/reservation';
+@import 'assets/stylesheets/Reserve';
