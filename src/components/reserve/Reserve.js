@@ -19,7 +19,7 @@ import { createReservation, resetCreateReservationState } from '../../redux/rese
 const Reserve = () => {
   const [params] = useSearchParams();
   const selectedLawyer = params.get('lawyer');
-  const { userSignedIn } = useSelector((state) => state.auth);
+  const { userSignedIn, status: userAuthStatus } = useSelector((state) => state.auth);
   const lawyersState = useSelector((state) => state.lawyers);
   const reservationState = useSelector((state) => state.reservations_create);
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const Reserve = () => {
     };
   }, []);
 
-  if (!userSignedIn) {
+  if (!userSignedIn && userAuthStatus !== 'signed_out') {
     return <Navigate to="/sign_in" state={{ notice: 'You need to sign in or sign up before continuing.' }} />;
   }
 

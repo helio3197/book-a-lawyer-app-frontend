@@ -27,6 +27,8 @@
     .offcanvas-body {
       height: 100%;
       padding-left: 0.7rem;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .logo {

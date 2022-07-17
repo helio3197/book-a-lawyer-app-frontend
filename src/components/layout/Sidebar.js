@@ -11,7 +11,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-import { signOut, resetState } from '../../redux/auth/auth';
+import { signOut } from '../../redux/auth/auth';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -20,11 +20,11 @@ const Sidebar = () => {
     userSignedIn: authState,
     status: authStatus,
     error: authError,
+    currentUser,
   } = useSelector((state) => state.auth);
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    if (authStatus === 'signed_out' || authStatus === 'signed_out_failed') dispatch(resetState());
     if (authStatus === 'signed_out') {
       navigate('/', { state: { notice: 'You have signed out successfully' } });
     }
@@ -73,6 +73,12 @@ const Sidebar = () => {
       <Nav.Link href="/account" as={navLinkHelper}>
         MY ACCOUNT
       </Nav.Link>
+      {currentUser.role === 'admin'
+        && (
+          <Nav.Link href="/lawyers" as={navLinkHelper}>
+            LAWYERS
+          </Nav.Link>
+        )}
       <Button type="button" onClick={signoutHandler} className="link-item btn btn-link bg-transparent border-0 text-start">
         SIGN OUT
       </Button>
