@@ -51,19 +51,22 @@ const requestCompleted = ({ reservations }) => ({
   },
 });
 
-export const fechReservations = () => async (dispatch, getState) => {
+export const deleteReservations = (id) => async (dispatch, getState) => {
   dispatch(requestStarted());
   try {
     const { authToken } = getState().auth;
-    const response = await fetch(API_RESERVATIONS_INDEX_ENDPOINT, {
+    const response = await fetch(`${API_RESERVATIONS_INDEX_ENDPOINT}/${id}`, {
+      method: 'DELETE',
       headers: {
+        'Content-type': 'Application/json',
         Authorization: authToken,
       },
     });
     if (!response.ok) {
       throw (await response.json()).error;
     }
-    dispatch(requestCompleted(await response.json()));
+
+    dispatch(requestCompleted());
   } catch (error) {
     dispatch(requestFailed(error));
   }

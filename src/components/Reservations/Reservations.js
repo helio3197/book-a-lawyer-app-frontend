@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
-import { fechReservations, deleteReservations } from '../../redux/reservations/reservations';
+import { fechReservations } from '../../redux/reservations/reservations';
+import { deleteReservations } from '../../redux/reservations/deleteReservation';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
 const Reservations = () => {
