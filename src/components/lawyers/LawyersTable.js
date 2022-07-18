@@ -46,7 +46,6 @@ const LawyersTable = ({ lawyers }) => (
         </div>
       ))}
     </div>
-    {console.log(lawyers)}
   </div>
 );
 
@@ -62,7 +61,11 @@ LawyersTable.propTypes = {
     id: PropTypes.number,
     created_at: PropTypes.string,
     updated_at: PropTypes.string,
-  })).isRequired,
+  })),
+};
+
+LawyersTable.defaultProps = {
+  lawyers: [],
 };
 
 export default LawyersTable;

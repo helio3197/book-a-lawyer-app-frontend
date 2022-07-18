@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {
+  Link, NavLink, useNavigate, useLocation,
+} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Nav from 'react-bootstrap/Nav';
+import { BsCaretLeft } from 'react-icons/bs';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -23,6 +26,7 @@ const Sidebar = () => {
     currentUser,
   } = useSelector((state) => state.auth);
   const [showSidebar, setShowSidebar] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (authStatus === 'signed_out') {
@@ -145,6 +149,12 @@ const Sidebar = () => {
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Navbar>
+      {/\/.*\/\w+.*/.test(location.pathname)
+        && (
+        <Button variant="primary" className="back-btn" onClick={() => navigate(-1)}>
+          <BsCaretLeft />
+        </Button>
+        )}
     </header>
   );
 };

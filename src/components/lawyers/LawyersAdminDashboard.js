@@ -32,7 +32,11 @@ LawyersAdminDashboard.propTypes = {
     id: PropTypes.number,
     created_at: PropTypes.string,
     updated_at: PropTypes.string,
-  })).isRequired,
+  })),
+};
+
+LawyersAdminDashboard.defaultProps = {
+  lawyers: [],
 };
 
 export default LawyersAdminDashboard;
