@@ -1,8 +1,8 @@
-const API_LAWYERS_CREATE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/lawyers`;
-const REQUEST_STARTED = 'book-a-lawyer/lawyerCreate/REQUEST_STARTED';
-const REQUEST_FAILED = 'book-a-lawyer/lawyerCreate/REQUEST_FAILED';
-const REQUEST_COMPLETED = 'book-a-lawyer/lawyerCreate/REQUEST_COMPLETED';
-const RESET_STATE = 'book-a-lawyer/lawyerCreate/RESET_STATE';
+const API_LAWYERS_DESTROY_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/lawyers`;
+const REQUEST_STARTED = 'book-a-lawyer/lawyerDestroy/REQUEST_STARTED';
+const REQUEST_FAILED = 'book-a-lawyer/lawyerDestroy/REQUEST_FAILED';
+const REQUEST_COMPLETED = 'book-a-lawyer/lawyerDestroy/REQUEST_COMPLETED';
+const RESET_STATE = 'book-a-lawyer/lawyerDestroy/RESET_STATE';
 const initialState = {
   status: 'idle',
 };
@@ -42,28 +42,26 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestCompleted = ({ lawyer }) => ({
+const requestCompleted = () => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'success',
-    lawyer,
   },
 });
 
-export const resetCreateLawyerState = () => ({
+export const resetDestroyLawyerState = () => ({
   type: RESET_STATE,
   payload: {
     status: 'idle',
   },
 });
 
-export const createLawyer = (body) => async (dispatch, getState) => {
+export const destroyLawyer = (id) => async (dispatch, getState) => {
   dispatch(requestStarted());
   try {
     const { authToken } = getState().auth;
-    const response = await fetch(API_LAWYERS_CREATE_ENDPOINT, {
-      method: 'POST',
-      body,
+    const response = await fetch(`${API_LAWYERS_DESTROY_ENDPOINT}/${id}`, {
+      method: 'DELETE',
       headers: {
         Authorization: authToken,
       },
@@ -72,7 +70,7 @@ export const createLawyer = (body) => async (dispatch, getState) => {
       throw (await response.json()).error;
     }
 
-    dispatch(requestCompleted(await response.json()));
+    dispatch(requestCompleted());
   } catch (error) {
     dispatch(requestFailed(error));
   }

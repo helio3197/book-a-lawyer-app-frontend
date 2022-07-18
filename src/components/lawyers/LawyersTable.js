@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { BiDetail, BiEdit, BiTrash } from 'react-icons/bi';
 
-const LawyersTable = ({ lawyers }) => (
+const LawyersTable = ({ lawyers, deleteHandler }) => (
   <div className="lawyers-table">
     <div className="flex-cols">
       <div className="row-header">
@@ -39,7 +39,7 @@ const LawyersTable = ({ lawyers }) => (
             <Link title="Edit" to={`/lawyers/${lawyer.id}/edit`}>
               <BiEdit />
             </Link>
-            <Button title="Delete" variant="link" className="p-0">
+            <Button title="Delete" variant="link" className="p-0" onClick={() => deleteHandler(lawyer.id)}>
               <BiTrash />
             </Button>
           </div>
@@ -62,6 +62,7 @@ LawyersTable.propTypes = {
     created_at: PropTypes.string,
     updated_at: PropTypes.string,
   })),
+  deleteHandler: PropTypes.func.isRequired,
 };
 
 LawyersTable.defaultProps = {

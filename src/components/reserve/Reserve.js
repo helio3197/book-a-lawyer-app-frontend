@@ -109,8 +109,8 @@ const Reserve = () => {
     if (lawyers) {
       if (reservationData.lawyer_id) {
         if (reservationData.duration) {
-          return `$${lawyers.find((lawyer) => lawyer.id === +reservationData.lawyer_id)
-            .rates * reservationData.duration}`;
+          return `$${(lawyers.find((lawyer) => lawyer.id === +reservationData.lawyer_id)
+            .rates * reservationData.duration).toFixed(2)}`;
         }
       }
     }
@@ -150,10 +150,16 @@ const Reserve = () => {
                     ))}
                     {lawyersState.status === 'fetching'
                       && (
-                        <Dropdown.Item eventKey="1" className="text-center">
+                        <Dropdown.Item eventKey="1" className="text-center" disabled>
                           <Spinner animation="border" variant="primary" role="status" className="my-auto">
                             <span className="visually-hidden">Loading...</span>
                           </Spinner>
+                        </Dropdown.Item>
+                      )}
+                    {!lawyers?.length
+                      && (
+                        <Dropdown.Item eventKey="1" className="text-center" disabled>
+                          There are no listed lawyers.
                         </Dropdown.Item>
                       )}
                   </Dropdown.Menu>
