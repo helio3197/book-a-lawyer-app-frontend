@@ -96,6 +96,8 @@ LawyersCarousel.propTypes = {
     bio: PropTypes.string,
     avatar_url: PropTypes.string,
     id: PropTypes.number,
+    created_at: PropTypes.string,
+    updated_at: PropTypes.string,
   })).isRequired,
 };
 

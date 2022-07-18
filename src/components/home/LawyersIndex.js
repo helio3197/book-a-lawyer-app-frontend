@@ -19,9 +19,11 @@ const LawyersIndex = () => {
     return (
       <Container as="section" fluid className="py-2 lawyers align-items-center">
         <h1 className="mt-3">Available lawyers</h1>
-        <Spinner animation="border" variant="primary" role="status" className="my-auto">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <div className="signout-loading">
+          <Spinner animation="border" variant="primary" role="status" className="my-auto">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
       </Container>
     );
   }

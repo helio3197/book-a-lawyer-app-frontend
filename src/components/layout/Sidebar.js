@@ -76,7 +76,7 @@ const Sidebar = () => {
       {currentUser.role === 'admin'
         && (
           <Nav.Link href="/lawyers" as={navLinkHelper}>
-            LAWYERS
+            MANAGE LAWYERS
           </Nav.Link>
         )}
       <Button type="button" onClick={signoutHandler} className="link-item btn btn-link bg-transparent border-0 text-start">
