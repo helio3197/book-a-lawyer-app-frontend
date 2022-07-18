@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import { fechReservations } from '../../redux/reservations/reservations';
@@ -12,18 +13,39 @@ const Reservations = () => {
   const dispatch = useDispatch();
   const reservationState = useSelector((state) => state.reservations);
   const lawyersState = useSelector((state) => state.lawyers);
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('p');
+  const [showCurrentPage, setShowCurrentPage] = useState(+currentPage || 1);
+  const [maxPagesNumber, setMaxPagesNumber] = useState(null);
+  const initialArrayIndex = ((showCurrentPage * 5) - 5);
+  const itemsToRender = reservationState.reservations.slice(initialArrayIndex, initialArrayIndex + 5);
+  const navigate = useNavigate();
+
+  console.log(itemsToRender);
 
   useEffect(() => {
-    if (reservationState.statusReservations !== 'completed') {
+    if (reservationState.status !== 'completed') {
       dispatch(fechReservations());
     }
   }, []);
 
   useEffect(() => {
-    if (lawyersState.statusLawyers !== 'completed') {
+    if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
   }, []);
+
+  // const maxPagesNumber = Math.floor(reservationState.reservations.length / 5);
+
+  useEffect(() => {
+    if (reservationState.status === 'completed') {
+      setMaxPagesNumber(Math.floor(reservationState.reservations.length / 5));
+    }
+  }, [reservationState.status]);
+
+  if (maxPagesNumber && (showCurrentPage > maxPagesNumber)) {
+    navigate(`/reservation?p=${maxPagesNumber}`);
+  }
 
   const deleteReservationData = (id) => () => {
     dispatch(deleteReservations(id));
@@ -49,7 +71,7 @@ const Reservations = () => {
   }
   return (
     <section className="reservationtop">
-      {reservationState.reservations.map((reserve) => (
+      {itemsToRender.map((reserve) => (
         <div key={reserve.id} className="allinclusive">
           {/* <img src={lawyersState.lawyers.filter((item) => item.id === reserve.lawyer_id)[0].avatar_url} alt="Profle" className="lawyer-pic" /> */}
           <div key={reserve.id} className="reservation">
