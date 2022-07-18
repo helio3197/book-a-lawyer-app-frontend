@@ -79,6 +79,13 @@ const Detail = () => {
               /hr
             </li>
           </div>
+          <div className="inner-listing">
+            <li><strong>Email:</strong></li>
+            <li className="inner-listing2">
+              { lawyer.email }
+              {' '}
+            </li>
+          </div>
         </ul>
         <Button href={mylink} variant="success" size="lg" className="resrvebtn">Reserve</Button>
       </div>
