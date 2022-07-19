@@ -2,7 +2,7 @@ const API_RESERVATIONS_DELETE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/
 const REQUEST_STARTED = 'book-a-lawyer/reservationsDelete/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/reservationsDelete/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/reservationsDelete/REQUEST_COMPLETED';
-const CLEAR_DELETE_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_COMPLETED';
+const CLEAR_DELETE_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_DELETE_STATE';
 
 const initialState = {
   reservations: [],

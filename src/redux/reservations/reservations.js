@@ -2,6 +2,8 @@ const API_RESERVATIONS_INDEX_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v
 const REQUEST_STARTED = 'book-a-lawyer/reservations/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/reservations/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/reservations/REQUEST_COMPLETED';
+const CLEAR_FETCH_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_FETCH_STATE';
+
 const initialState = {
   reservations: [],
 };
@@ -23,6 +25,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    case CLEAR_FETCH_STATE:
+      return action.payload;
     default:
       return state;
   }
@@ -48,6 +52,13 @@ const requestCompleted = ({ reservations }) => ({
   payload: {
     status: 'completed',
     reservations,
+  },
+});
+
+export const clearFetchReservationState = () => ({
+  type: CLEAR_FETCH_STATE,
+  payload: {
+    status: 'idle',
   },
 });
 
