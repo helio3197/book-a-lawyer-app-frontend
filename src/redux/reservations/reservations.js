@@ -27,7 +27,10 @@ const reducer = (state = initialState, action) => {
         ...action.payload,
       };
     case CLEAR_FETCH_STATE:
-      return action.payload;
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

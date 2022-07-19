@@ -28,9 +28,7 @@ const Reservations = () => {
     if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
-    return () => {
-      dispatch(clearFetchReservationState());
-    };
+    dispatch(clearFetchReservationState());
   }, []);
 
   useEffect(() => {
