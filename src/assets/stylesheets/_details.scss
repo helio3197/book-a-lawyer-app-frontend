@@ -17,11 +17,12 @@
 
 .bio-head {
   padding-top: 10px;
-  font-size: 30px;
+  // font-size: 30px;
 }
 
 .bio {
   padding: 5px 20px 10px 20px;
+  font-size: 0.6rem;
 }
 
 .lawyer-items {
@@ -47,6 +48,10 @@
     align-content: center;
     width: 100vw;
     height: 100vh;
+  }
+
+  .bio {
+    font-size: 0.9rem;
   }
 
   .profile-pic {
@@ -108,7 +113,7 @@
   }
 
   .bio {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 
   .bottom-details {
