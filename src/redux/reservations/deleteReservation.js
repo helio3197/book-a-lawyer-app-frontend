@@ -43,11 +43,10 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestCompleted = ({ reservations }) => ({
+const requestCompleted = () => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'completed',
-    reservations,
   },
 });
 
