@@ -2,7 +2,7 @@ const API_RESERVATIONS_DELETE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/
 const REQUEST_STARTED = 'book-a-lawyer/reservationsDelete/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/reservationsDelete/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/reservationsDelete/REQUEST_COMPLETED';
-const CLEAR_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_COMPLETED';
+const CLEAR_DELETE_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_COMPLETED';
 
 const initialState = {
   reservations: [],
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
-    case CLEAR_STATE:
+    case CLEAR_DELETE_STATE:
       return action.payload;
     default:
       return state;
@@ -55,8 +55,8 @@ const requestCompleted = () => ({
   },
 });
 
-export const resetCreateReservationState = () => ({
-  type: CLEAR_STATE,
+export const clearDeleteReservationState = () => ({
+  type: CLEAR_DELETE_STATE,
   payload: {
     status: 'idle',
   },

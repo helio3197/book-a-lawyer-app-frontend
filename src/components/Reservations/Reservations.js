@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Pagination from 'react-bootstrap/Pagination';
 import { fechReservations } from '../../redux/reservations/reservations';
-import { deleteReservations, clearReservationState } from '../../redux/reservations/deleteReservation';
+import { deleteReservations, clearDeleteReservationState } from '../../redux/reservations/deleteReservation';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
 const Reservations = () => {
@@ -28,12 +28,10 @@ const Reservations = () => {
     if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
-    return () => {
-      dispatch(clearReservationState());
-    };
+    // return () => {
+    //   dispatch(clearDeleteReservationState());
+    // };
   }, []);
-
-  // const maxPagesNumber = Math.floor(reservationState.reservations.length / 5);
 
   useEffect(() => {
     if (reservationState.status === 'completed') {
@@ -50,6 +48,7 @@ const Reservations = () => {
 
   const deleteReservationData = (id) => () => {
     dispatch(deleteReservations(id));
+    dispatch(clearDeleteReservationState());
   };
 
   if (lawyersState.status === 'idle' || lawyersState.status === 'fetching') {
