@@ -87,7 +87,7 @@ const Detail = () => {
             </li>
           </div>
         </ul>
-        <Button href={mylink} variant="success" size="lg" className="resrvebtn">Reserve</Button>
+        <Button href={mylink} variant="primary" size="lg" className="resrvebtn">Reserve</Button>
       </div>
     </section>
   );
