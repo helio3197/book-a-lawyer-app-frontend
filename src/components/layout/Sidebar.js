@@ -15,6 +15,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import { signOut } from '../../redux/auth/auth';
+import logos from '../../assets/images/Logo.png';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -97,13 +98,13 @@ const Sidebar = () => {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
               <Link to="/" className="text-reset logo" onClick={() => setShowSidebar((state) => !state)}>
-                The Lawyers
+                <img src={logos} alt="Profle" className="logo-pic" />
               </Link>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column bg-light">
             <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
-              The Lawyers
+              <img src={logos} alt="Profle" className="logo-pic" />
             </Link>
             <Nav className="navbar-links position-relative flex-column">
               {authState ? navLinks() : navLinksNotSignedIn()}

@@ -1,0 +1,106 @@
+.reservationtop {
+  padding: 20px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-container {
+  overflow: auto;
+  height: 100%;
+}
+
+.reservations-pagination {
+  justify-content: center;
+  margin: 0;
+}
+
+.lawyer-thumb {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+}
+
+.allinclusive {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  border: 2px solid black;
+  width: 70%;
+  min-width: 280px;
+  background-color: #fff;
+}
+
+.reservation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+}
+
+.reservationbtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.reservationdeatails {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+
+.reservationbtns button {
+  width: 60%;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 700px) {
+  .allinclusive {
+    display: flex;
+    border: 2px solid black;
+    flex-direction: row;
+    margin: 10px auto;
+    max-width: 1200px;
+    background-color: #fff;
+  }
+
+  .lawyer-pic {
+    height: 180px;
+    margin-left: auto;
+  }
+
+  .reservation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .reservationdeatails {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0;
+  }
+
+  .reservationbtns {
+    flex-direction: column;
+    justify-content: space-around;
+    width: 35%;
+  }
+
+  .reservationbtns button {
+    margin: 15px 0 !important;
+  }
+
+  .lawyer-thumb {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+  }
+}
