@@ -6,8 +6,8 @@ import { useSearchParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Pagination from 'react-bootstrap/Pagination';
-import { fechReservations } from '../../redux/reservations/reservations';
-import { deleteReservations, clearDeleteReservationState, clearFetchReservationState } from '../../redux/reservations/deleteReservation';
+import { fechReservations, clearFetchReservationState } from '../../redux/reservations/reservations';
+import { deleteReservations, clearDeleteReservationState } from '../../redux/reservations/deleteReservation';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
 const Reservations = () => {
