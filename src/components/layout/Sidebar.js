@@ -1,20 +1,20 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {
+  Link, NavLink, useNavigate, useLocation,
+} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Nav from 'react-bootstrap/Nav';
+import { BsCaretLeft } from 'react-icons/bs';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-import { signOut, resetState } from '../../redux/auth/auth';
+import { signOut } from '../../redux/auth/auth';
 import logos from '../../assets/images/Logo.png';
 
 const Sidebar = () => {
@@ -24,11 +24,12 @@ const Sidebar = () => {
     userSignedIn: authState,
     status: authStatus,
     error: authError,
+    currentUser,
   } = useSelector((state) => state.auth);
   const [showSidebar, setShowSidebar] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    if (authStatus === 'signed_out' || authStatus === 'signed_out_failed') dispatch(resetState());
     if (authStatus === 'signed_out') {
       navigate('/', { state: { notice: 'You have signed out successfully' } });
     }
@@ -77,6 +78,12 @@ const Sidebar = () => {
       <Nav.Link href="/account" as={navLinkHelper}>
         MY ACCOUNT
       </Nav.Link>
+      {currentUser.role === 'admin'
+        && (
+          <Nav.Link href="/lawyers" as={navLinkHelper}>
+            MANAGE LAWYERS
+          </Nav.Link>
+        )}
       <Button type="button" onClick={signoutHandler} className="link-item btn btn-link bg-transparent border-0 text-start">
         SIGN OUT
       </Button>
@@ -88,7 +95,7 @@ const Sidebar = () => {
       <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
         <Navbar.Offcanvas id="offcanvasNavbar-expand">
-          <Offcanvas.Header closeButton>
+          <Offcanvas.Header closeButton className="pb-0">
             <Offcanvas.Title>
               <Link to="/" className="text-reset logo" onClick={() => setShowSidebar((state) => !state)}>
                 <img src={logos} alt="Profle" className="logo-pic" />
@@ -96,7 +103,7 @@ const Sidebar = () => {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body className="pe-0 pb-1 d-flex flex-column bg-light">
-            <Link to="/" className="text-reset logo d-none d-lg-block mt-lg-2">
+            <Link to="/" className="text-reset logo d-none d-lg-block pe-5 pt-3">
               <img src={logos} alt="Profle" className="logo-pic" />
             </Link>
             <Nav className="navbar-links position-relative flex-column">
@@ -143,6 +150,12 @@ const Sidebar = () => {
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Navbar>
+      {/\/.*\/\w+.*/.test(location.pathname)
+        && (
+        <Button variant="primary" className="back-btn" onClick={() => navigate(-1)}>
+          <BsCaretLeft />
+        </Button>
+        )}
     </header>
   );
 };

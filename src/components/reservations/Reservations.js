@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Pagination from 'react-bootstrap/Pagination';
-import { fechReservations, clearFetchReservationState } from '../../redux/reservations/reservations';
+import { fechReservations } from '../../redux/reservations/reservations';
 import { deleteReservations, clearDeleteReservationState } from '../../redux/reservations/deleteReservation';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 
@@ -28,7 +28,9 @@ const Reservations = () => {
     if (lawyersState.status !== 'completed') {
       dispatch(getLawyers());
     }
-    dispatch(clearFetchReservationState());
+    return () => {
+      dispatch(clearDeleteReservationState());
+    };
   }, []);
 
   useEffect(() => {
@@ -46,7 +48,6 @@ const Reservations = () => {
 
   const deleteReservationData = (id) => () => {
     dispatch(deleteReservations(id));
-    dispatch(clearDeleteReservationState());
   };
 
   if (lawyersState.status === 'idle' || lawyersState.status === 'fetching') {
@@ -78,7 +79,6 @@ const Reservations = () => {
       <div className="reservation-container">
         {itemsToRender.map((reserve) => (
           <div key={reserve.id} className="allinclusive">
-            {/* <img src={lawyersState.lawyers.filter((item) => item.id === reserve.lawyer_id)[0].avatar_url} alt="Profle" className="lawyer-pic" /> */}
             <div key={reserve.id} className="reservation">
               <div className="reservationdeatails">
                 <div>

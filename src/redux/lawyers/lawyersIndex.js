@@ -47,7 +47,7 @@ const requestCompleted = ({ lawyers }) => ({
   type: REQUEST_COMPLETED,
   payload: {
     status: 'completed',
-    lawyers,
+    lawyers: lawyers.map((item) => ({ ...item, rates: +item.rates })),
   },
 });
 

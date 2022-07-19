@@ -1,10 +1,9 @@
-const API_RESERVATIONS_INDEX_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/reservations`;
-const REQUEST_STARTED = 'book-a-lawyer/reservations/REQUEST_STARTED';
-const REQUEST_FAILED = 'book-a-lawyer/reservations/REQUEST_FAILED';
-const REQUEST_COMPLETED = 'book-a-lawyer/reservations/REQUEST_COMPLETED';
-
+const API_LAWYERS_CREATE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/lawyers`;
+const REQUEST_STARTED = 'book-a-lawyer/lawyerCreate/REQUEST_STARTED';
+const REQUEST_FAILED = 'book-a-lawyer/lawyerCreate/REQUEST_FAILED';
+const REQUEST_COMPLETED = 'book-a-lawyer/lawyerCreate/REQUEST_COMPLETED';
+const RESET_STATE = 'book-a-lawyer/lawyerCreate/RESET_STATE';
 const initialState = {
-  reservations: [],
   status: 'idle',
 };
 
@@ -21,10 +20,8 @@ const reducer = (state = initialState, action) => {
         ...action.payload,
       };
     case REQUEST_COMPLETED:
-      return {
-        ...state,
-        ...action.payload,
-      };
+    case RESET_STATE:
+      return action.payload;
     default:
       return state;
   }
@@ -45,19 +42,28 @@ const requestFailed = (error) => ({
   },
 });
 
-const requestCompleted = ({ reservations }) => ({
+const requestCompleted = ({ lawyer }) => ({
   type: REQUEST_COMPLETED,
   payload: {
-    status: 'completed',
-    reservations,
+    status: 'success',
+    lawyer,
   },
 });
 
-export const fechReservations = () => async (dispatch, getState) => {
+export const resetCreateLawyerState = () => ({
+  type: RESET_STATE,
+  payload: {
+    status: 'idle',
+  },
+});
+
+export const createLawyer = (body) => async (dispatch, getState) => {
   dispatch(requestStarted());
   try {
     const { authToken } = getState().auth;
-    const response = await fetch(API_RESERVATIONS_INDEX_ENDPOINT, {
+    const response = await fetch(API_LAWYERS_CREATE_ENDPOINT, {
+      method: 'POST',
+      body,
       headers: {
         Authorization: authToken,
       },
@@ -65,6 +71,7 @@ export const fechReservations = () => async (dispatch, getState) => {
     if (!response.ok) {
       throw (await response.json()).error;
     }
+
     dispatch(requestCompleted(await response.json()));
   } catch (error) {
     dispatch(requestFailed(error));
