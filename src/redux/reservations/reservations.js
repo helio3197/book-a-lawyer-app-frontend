@@ -6,6 +6,7 @@ const CLEAR_FETCH_STATE = 'book-a-lawyer/reservationsDelete/CLEAR_FETCH_STATE';
 
 const initialState = {
   reservations: [],
+  status: 'idle',
 };
 
 const reducer = (state = initialState, action) => {
