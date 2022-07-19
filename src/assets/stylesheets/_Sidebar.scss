@@ -9,10 +9,7 @@
   }
 
   .logo-pic {
-    width: 85%;
-    height: 121px;
-    margin: 0 auto;
-    padding: 40px 20px 20px 20px;
+    width: 100%;
   }
 
   @media (min-width: 992px) {
@@ -27,13 +24,6 @@
 
     .navbar-expand-lg {
       height: 100%;
-    }
-
-    .logo-pic {
-      width: 85%;
-      height: 121px;
-      margin: 0 auto;
-      padding: 40px 20px 20px 20px;
     }
 
     .offcanvas {
@@ -69,7 +59,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 4rem;
+  margin-top: 3.5rem;
 
   @media (max-width: 375px) {
     margin-top: 2rem;
