@@ -1,7 +1,7 @@
-const API_RESERVATIONS_INDEX_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/reservations`;
-const REQUEST_STARTED = 'book-a-lawyer/reservations/REQUEST_STARTED';
-const REQUEST_FAILED = 'book-a-lawyer/reservations/REQUEST_FAILED';
-const REQUEST_COMPLETED = 'book-a-lawyer/reservations/REQUEST_COMPLETED';
+const API_RESERVATIONS_DELETE_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v1/reservations`;
+const REQUEST_STARTED = 'book-a-lawyer/reservationsDelete/REQUEST_STARTED';
+const REQUEST_FAILED = 'book-a-lawyer/reservationsDelete/REQUEST_FAILED';
+const REQUEST_COMPLETED = 'book-a-lawyer/reservationsDelete/REQUEST_COMPLETED';
 const initialState = {
   reservations: [],
 };
@@ -55,7 +55,7 @@ export const deleteReservations = (id) => async (dispatch, getState) => {
   dispatch(requestStarted());
   try {
     const { authToken } = getState().auth;
-    const response = await fetch(`${API_RESERVATIONS_INDEX_ENDPOINT}/${id}`, {
+    const response = await fetch(`${API_RESERVATIONS_DELETE_ENDPOINT}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-type': 'Application/json',
