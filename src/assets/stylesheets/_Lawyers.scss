@@ -12,8 +12,8 @@
 }
 
 .lawyers-table {
-  border: 1px solid;
-  background-color: black;
+  border: 1px solid $secondary;
+  background-color: $secondary;
 
   &,
   .flex-cols,
@@ -21,6 +21,12 @@
   .row-header,
   .row-body {
     gap: 1px;
+  }
+
+  .row-body:nth-of-type(even) {
+    .body-col {
+      background-color: #f2f2f2;
+    }
   }
 
   .flex-cols {

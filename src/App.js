@@ -9,6 +9,7 @@ import Reserve from './components/reserve/Reserve';
 import Account from './components/account/Account';
 import Lawyers from './components/lawyers/Lawyers';
 import LawyerNew from './components/lawyers/lawyer-new/LawyerNew';
+import LawyerEdit from './components/lawyers/lawyer-edit/LawyerEdit';
 
 const App = () => (
   <Router>
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="account" element={<Account />} />
         <Route path="lawyers" element={<Lawyers />} />
         <Route path="lawyers/new" element={<LawyerNew />} />
+        <Route path="lawyers/:lawyerId/edit" element={<LawyerEdit />} />
       </Route>
     </Routes>
   </Router>
