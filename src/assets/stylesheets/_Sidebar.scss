@@ -8,6 +8,13 @@
     padding: 0;
   }
 
+  .logo-pic {
+    width: 85%;
+    height: 121px;
+    margin: 0 auto;
+    padding: 40px 20px 20px 20px;
+  }
+
   @media (min-width: 992px) {
     position: static;
     flex-shrink: 0;
@@ -18,6 +25,13 @@
 
     .navbar-expand-lg {
       height: 100%;
+    }
+
+    .logo-pic {
+      width: 85%;
+      height: 121px;
+      margin: 0 auto;
+      padding: 40px 20px 20px 20px;
     }
 
     .offcanvas {
@@ -31,7 +45,6 @@
 
     .logo {
       font-size: 3rem;
-      transform: rotate(-13deg);
     }
   }
 }
@@ -39,7 +52,6 @@
 .logo {
   font-family: 'Water Brush', cursive;
   font-size: 2.7rem;
-  transform: rotate(-13deg) translateY(0.8rem);
   display: block;
 }
 
