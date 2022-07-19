@@ -68,7 +68,7 @@ const LawyersAdminDashboard = ({ lawyers }) => {
 LawyersAdminDashboard.propTypes = {
   lawyers: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    phone: PropTypes.number,
+    phone: PropTypes.string,
     email: PropTypes.string,
     location: PropTypes.string,
     rates: PropTypes.number,

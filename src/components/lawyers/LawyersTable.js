@@ -52,7 +52,7 @@ const LawyersTable = ({ lawyers, deleteHandler }) => (
 LawyersTable.propTypes = {
   lawyers: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    phone: PropTypes.number,
+    phone: PropTypes.string,
     email: PropTypes.string,
     location: PropTypes.string,
     rates: PropTypes.number,

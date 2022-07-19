@@ -89,7 +89,7 @@ const LawyersCarousel = ({ items }) => {
 LawyersCarousel.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    phone: PropTypes.number,
+    phone: PropTypes.string,
     email: PropTypes.string,
     location: PropTypes.string,
     rates: PropTypes.number,
