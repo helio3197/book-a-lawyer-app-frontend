@@ -15,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import CustomDropMenu from './CustomDropMenu';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 import { createReservation, resetCreateReservationState } from '../../redux/reservations/reservationsCreate';
+import { fechReservations } from '../../redux/reservations/reservations';
 
 const Reserve = () => {
   const [params] = useSearchParams();
@@ -44,7 +45,8 @@ const Reserve = () => {
 
   useEffect(() => {
     if (reservationState.status === 'success') {
-      navigate('/', { state: { notice: 'Reservation created successfully!' } });
+      navigate('/reservations', { state: { notice: 'Reservation created successfully!' } });
+      dispatch(fechReservations());
     }
     if (typeof reservationState.error === 'string') {
       navigate(`${location.pathname}${location.search}`, { state: { notice: `Something went wrong: ${reservationState.error}` } });
@@ -178,7 +180,7 @@ const Reserve = () => {
                 selected={reservationData.reservationdate}
                 onChange={(date) => setReservationData((state) => ({
                   ...state,
-                  reservationdate: date.getHours() < 8 ? new Date(date.setHours(9)) : date,
+                  reservationdate: date?.getHours() < 8 ? new Date(date?.setHours(9)) : date,
                 }))}
                 customInput={<CustomInput />}
                 minDate={new Date()}
