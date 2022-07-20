@@ -126,6 +126,7 @@ const Reserve = () => {
   return (
     <Container fluid className="h-100 reserve-bg d-flex py-2 overflow-auto">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
+        <h2 className="text-center">Book a lawyer</h2>
         <Form className={reservationState.status === 'fetching' ? 'reserve-form position-relative' : 'reserve-form'}>
           <div className="mb-2">
             {(reservationData.lawyer_id && lawyers)

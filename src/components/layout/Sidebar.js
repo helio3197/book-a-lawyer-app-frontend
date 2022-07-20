@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Nav from 'react-bootstrap/Nav';
 import { BsCaretLeft } from 'react-icons/bs';
+import { HiMenuAlt4 } from 'react-icons/hi';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -93,7 +94,9 @@ const Sidebar = () => {
   return (
     <header className="sidebar">
       <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
-        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
+        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" className="px-1 py-0">
+          <HiMenuAlt4 style={{ fontSize: '2.5rem', color: 'black' }} />
+        </Navbar.Toggle>
         <Navbar.Offcanvas id="offcanvasNavbar-expand">
           <Offcanvas.Header closeButton className="pb-0">
             <Offcanvas.Title>
