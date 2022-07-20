@@ -1,14 +1,38 @@
 .detail-section {
-  padding: 10px;
-  text-align: center;
+  .bottom-details {
+    a {
+      align-self: center;
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 1200px) {
+    align-items: center;
+
+    .top-details {
+      width: 60%;
+    }
+
+    .bottom-details {
+      width: 40%;
+      align-self: stretch;
+      
+      a {
+        margin-top: auto;
+      }
+    }
+  }
 }
 
 .profile-pic {
-  padding-left: 20px;
-  padding-top: 20px;
-  width: 180px;
-  height: 180px;
+  width: 60%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile-name {
@@ -26,109 +50,18 @@
 
 .lawyer-items {
   list-style: none;
-  margin: auto;
-  margin-top: 50px;
+  
+  .inner-listing:nth-of-type(odd) {
+    background-color: $soft-white;
+  }
 }
 
 .inner-listing {
   display: flex;
-  width: 60%;
   justify-content: space-between;
-  margin: auto;
+  padding: 0.6rem;
 }
 
 .resrvebtn {
   margin-top: 25px;
-}
-
-@media screen and (min-width: 913px) and (max-width: 1199px) {
-  .detail-section {
-    display: flex;
-    align-content: center;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .bio {
-    font-size: 0.9rem;
-  }
-
-  .profile-pic {
-    width: 190px;
-    height: 200px;
-    margin: 30px auto;
-  }
-
-  .top-details {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20vh;
-  }
-
-  .profile-name {
-    font-size: 1.5rem;
-  }
-
-  .bottom-details {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 33vh;
-  }
-
-  .lawyer-items li {
-    font-size: 1rem;
-  }
-
-  .inner-listing {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .detail-section {
-    display: flex;
-  }
-
-  .profile-pic {
-    width: 320px;
-    height: 330px;
-    margin: 30px auto;
-  }
-
-  .top-details {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .profile-name {
-    font-size: 1.5rem;
-  }
-
-  .bio {
-    font-size: 1.2rem;
-  }
-
-  .bottom-details {
-    flex-direction: column;
-    align-items: center;
-    margin: auto 2vw;
-  }
-
-  .lawyer-items li {
-    font-size: 2rem;
-    padding: 10px 4px;
-  }
-
-  .inner-listing {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
 }

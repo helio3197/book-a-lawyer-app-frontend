@@ -76,6 +76,10 @@ const Reserve = () => {
 
   const removeSelectedLawyer = (id) => {
     const lawyerToRemove = lawyers.find((lawyer) => lawyer.id === +id);
+    if (!lawyerToRemove) {
+      setReservationData((state) => ({ ...state, lawyer_id: null }));
+      return null;
+    }
     const clickHandler = () => setReservationData((state) => ({ ...state, lawyer_id: null }));
 
     return (

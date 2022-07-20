@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Detail from './LawyerDetails';
 
 const Lawyer = () => {
   const userSignedIn = useSelector((state) => state.auth.userSignedIn);
-  const navigate = useNavigate;
 
-  useEffect(() => {
-    if (!userSignedIn) {
-      navigate('/', { state: { notice: 'Please sign in with your username and password' } });
-    }
-  }, []);
+  if (!userSignedIn) {
+    return <Navigate to="/sign_in" state={{ notice: 'You need to sign in or sign up before continuing.' }} />;
+  }
 
   return (
-    <Container fluid className="p-0 h-100">
+    <Container fluid className="p-0 h-100 bg-light overflow-auto d-flex">
       <Detail />
     </Container>
   );
