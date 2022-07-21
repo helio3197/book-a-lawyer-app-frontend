@@ -20,6 +20,10 @@ This repository is a React/Redux developed frontend app named "Book a lawyer App
 - Visualize details for a lawyer.
 - Optimized for mobile devices.
 
+## Backend repo
+
+[Click here](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
+
 
 ## Built With
 
@@ -30,7 +34,7 @@ This repository is a React/Redux developed frontend app named "Book a lawyer App
 - JavaScript
 - [REST API](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
 
-## Live Page
+## Live demo
 
 [Click Here]()
 
@@ -44,6 +48,9 @@ Follow these steps:
 Have the following correctly installed.
 - Node.js & NPM
 - Git
+
+Have the backend repo setup correctly
+- [Instructions](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
 
 ### Setup
 
@@ -60,8 +67,12 @@ $ git clone git@github.com:helio3197/book-a-lawyer-app-frontend.git
 $ npm install
 ```
 ### Usage
+- Run the backend server on the port: 3000
+ ```
+rails s --port=3000
+```
 
-- Run the server on the specified port:
+- Run the frontend server on the specified port:
 ```
 $ PORT=3001 npm start
 ```
