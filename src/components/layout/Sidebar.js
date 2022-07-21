@@ -123,22 +123,22 @@ const Sidebar = () => {
             <div className="mt-auto ms-2">
               <ul className="list-unstyled d-flex social-icons gap-3">
                 <li className="text-secondary">
-                  <a href="/">
+                  <a href="/#">
                     <EmailIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <FacebookIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <TwitterIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <InstagramIcon className="the-item" />
                   </a>
                 </li>
@@ -148,7 +148,15 @@ const Sidebar = () => {
                   </a>
                 </li>
               </ul>
-              <p className="small m-0">©2022 Lawyers | Ricky&Kenny</p>
+              <p className="small m-0">
+                ©2022 Lawyers |
+                {' '}
+                <a href="https://www.linkedin.com/in/richardoppiyo/" target="_blank" rel="noreferrer">Ricky</a>
+                {' '}
+                &
+                {' '}
+                <a href="https://www.linkedin.com/in/kenny-salazar-granados/" target="_blank" rel="noreferrer">Kenny</a>
+              </p>
             </div>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
