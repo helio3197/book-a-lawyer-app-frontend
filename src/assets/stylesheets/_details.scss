@@ -20,7 +20,7 @@
     .bottom-details {
       width: 40%;
       align-self: stretch;
-      
+
       a {
         margin-top: auto;
       }
@@ -48,18 +48,18 @@
   font-size: 0.9rem;
 }
 
-.lawyer-items {
-  list-style: none;
-  
-  .inner-listing:nth-of-type(odd) {
-    background-color: $soft-white;
-  }
-}
-
 .inner-listing {
   display: flex;
   justify-content: space-between;
   padding: 0.6rem;
+}
+
+.lawyer-items {
+  list-style: none;
+
+  .inner-listing:nth-of-type(odd) {
+    background-color: $soft-white;
+  }
 }
 
 .resrvebtn {
