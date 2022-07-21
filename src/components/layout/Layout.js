@@ -19,7 +19,7 @@ const Layout = () => {
     <div className="d-flex h-100 position-relative">
       <Sidebar />
       <main className="flex-grow-1 position-relative w-100 overflow-hidden">
-        {notice && <Notice message={notice} />}
+        {notice && <Notice message={notice} closeHandler={setNotice} />}
         <Outlet />
       </main>
     </div>

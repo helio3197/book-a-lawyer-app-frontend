@@ -210,7 +210,7 @@ const Reservations = () => {
         </Modal.Header>
         <Modal.Body className="position-relative">
           <Form id="edit-reservation">
-            <Form.Group controlId="reservationdate">
+            <Form.Group controlId="reservationdate" className="mb-2">
               <Form.Label visuallyHidden>
                 Appoint date
               </Form.Label>
@@ -227,9 +227,9 @@ const Reservations = () => {
                 wrapperClassName="flex-grow-1"
               />
             </Form.Group>
-            <Form.Group controlId="reservationtime">
+            <Form.Group controlId="reservationtime" className="mb-2">
               <Form.Label visuallyHidden>
-                Appoint date
+                Appoint time
               </Form.Label>
               <DatePicker
                 selected={formData.reservationtime}
@@ -252,7 +252,7 @@ const Reservations = () => {
             <Form.Control.Feedback type="invalid" className={validateInput('reservationdate') ? 'd-block' : ''}>
               {renderError('reservationdate')}
             </Form.Control.Feedback>
-            <InputGroup className="flex-grow-1" style={{ width: '150px' }}>
+            <InputGroup className="flex-grow-1" style={{ maxWidth: '274px' }}>
               <Form.Select
                 value={formData.duration}
                 onChange={(e) => setFormData((state) => ({
