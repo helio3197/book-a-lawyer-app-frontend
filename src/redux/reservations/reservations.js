@@ -55,7 +55,8 @@ const requestCompleted = ({ reservations }) => ({
 export const clearReservations = () => ({
   type: CLEAR_RESERVATIONS,
   payload: {
-    status: 'resetted',
+    status: 'idle',
+    reservations: [],
   },
 });
 

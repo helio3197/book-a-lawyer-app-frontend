@@ -71,6 +71,10 @@ $ npm install
  ```
 rails s --port=3000
 ```
+- If you want to use the deployed backend server, edit the `.env` file on the project's root, and edit the `REACT_APP_API_HOST` environment variable with the value `https://book-a-lawyer-backend.herokuapp.com/`
+```
+REACT_APP_API_HOST=https://book-a-lawyer-backend.herokuapp.com/
+```
 
 - Run the frontend server on the specified port:
 ```
