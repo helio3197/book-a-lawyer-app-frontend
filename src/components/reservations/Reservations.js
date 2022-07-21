@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Pagination from 'react-bootstrap/Pagination';
@@ -18,6 +18,7 @@ import { updateReservation, resetUpdateReservationState } from '../../redux/rese
 const Reservations = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authState = useSelector((state) => state.auth);
   const reservationState = useSelector((state) => state.reservations);
   const editReservationState = useSelector((state) => state.reservation_update);
   const lawyersState = useSelector((state) => state.lawyers);
@@ -87,6 +88,10 @@ const Reservations = () => {
     dispatch(deleteReservations(id));
   };
 
+  if (!authState.userSignedIn) {
+    return <Navigate to="/sign_in" state={{ notice: 'You need to sign in before you continue' }} />;
+  }
+
   if (lawyersState.status === 'idle' || lawyersState.status === 'fetching') {
     return (
       <Container as="section" fluid className="py-2 lawyers align-items-center">
@@ -101,7 +106,15 @@ const Reservations = () => {
   if (lawyersState.status === 'failed') {
     return (
       <Container as="section" fluid className="py-2 lawyers">
-        <h2 className="mt-2">{`Something went wrong: ${lawyersState.error}`}</h2>
+        <h2 className="mt-2 text-center mt-auto mb-auto">{`Something went wrong: ${lawyersState.error}`}</h2>
+      </Container>
+    );
+  }
+
+  if (!reservationState.reservations.length) {
+    return (
+      <Container as="section" fluid className="py-2 lawyers">
+        <h2 className="mt-2 text-center mt-auto mb-auto">The reservation list is empty</h2>
       </Container>
     );
   }
