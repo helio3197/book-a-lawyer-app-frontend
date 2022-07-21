@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Nav from 'react-bootstrap/Nav';
 import { BsCaretLeft } from 'react-icons/bs';
+import { HiMenuAlt4 } from 'react-icons/hi';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -93,7 +94,9 @@ const Sidebar = () => {
   return (
     <header className="sidebar">
       <Navbar expand="lg" collapseOnSelect expanded={showSidebar} onToggle={() => setShowSidebar((state) => !state)}>
-        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
+        <Navbar.Toggle aria-controls="offcanvasNavbar-expand" className="px-1 py-0">
+          <HiMenuAlt4 style={{ fontSize: '2.5rem', color: 'black' }} />
+        </Navbar.Toggle>
         <Navbar.Offcanvas id="offcanvasNavbar-expand">
           <Offcanvas.Header closeButton className="pb-0">
             <Offcanvas.Title>
@@ -120,22 +123,22 @@ const Sidebar = () => {
             <div className="mt-auto ms-2">
               <ul className="list-unstyled d-flex social-icons gap-3">
                 <li className="text-secondary">
-                  <a href="/">
+                  <a href="/#">
                     <EmailIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <FacebookIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <TwitterIcon className="the-item" />
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="/#">
                     <InstagramIcon className="the-item" />
                   </a>
                 </li>
@@ -145,7 +148,15 @@ const Sidebar = () => {
                   </a>
                 </li>
               </ul>
-              <p className="small m-0">©2022 Lawyers | Ricky&Kenny</p>
+              <p className="small m-0">
+                ©2022 Lawyers |
+                {' '}
+                <a href="https://www.linkedin.com/in/richardoppiyo/" target="_blank" rel="noreferrer">Ricky</a>
+                {' '}
+                &
+                {' '}
+                <a href="https://www.linkedin.com/in/kenny-salazar-granados/" target="_blank" rel="noreferrer">Kenny</a>
+              </p>
             </div>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

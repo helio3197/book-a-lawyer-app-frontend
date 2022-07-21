@@ -1,46 +1,117 @@
-# Getting Started with Create React App and Redux
+# Book A Lawyer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+> A React/Redux full-stack app for managing appointments with lawyers
 
-## Available Scripts
+![screenshot](./screenshot.png)
 
-In the project directory, you can run:
 
-### `npm start`
+This repository is a React/Redux developed frontend app named "Book a lawyer App". The purpose of the project is to automate the law services. The Application allows an authenticated user to log in to the system, get a list of all available lawyers whose can be bookeed for a specified date and time. The lawyers' bio has the contact details, location, pricing per hour of the lawyer from which a user gets more insights. It also has dedicated pages to see the user's reservations and a reserve form. An admin user has the right to add/edit/remove a lawyer from the database and hence can see the Manage tab.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Main features:**
+- Account system, users can:
+  - Create an account and provide an optional avatar.
+  - Login to the app using email and password
+  - Edit a personal account, users can modify his personal information.
+- Reserve/booking system, users can:
+  - Book an appointment with a lawyer on an incoming date, and set the appointment's duration.
+  - See personal reservations in the reservation page.
+  - Modify an existing reservation.
+  - Cancel a reservation.
+- Visualize details for a lawyer.
+- Optimized for mobile devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backend repo
 
-### `npm test`
+[Click here](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Built With
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React 18.2.0
+- React-redux 8.0.2
+- Sass 1.53
+- React-bootstrap 2.4.0
+- JavaScript
+- [REST API](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Live demo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[Click Here]()
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Have the following correctly installed.
+- Node.js & NPM
+- Git
 
-## Learn More
+Have the backend repo setup correctly
+- [Instructions](https://github.com/richardoppiyo/book-a-lawyer-App-backend)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Open a terminal window where you want to have installed a clone of the repository.
+
+### Install
+
+- Use this command to clone the repo:
+```
+$ git clone git@github.com:helio3197/book-a-lawyer-app-frontend.git
+```
+- Install the required dependencies:
+```
+$ npm install
+```
+### Usage
+- Run the backend server on the port: 3000
+ ```
+rails s --port=3000
+```
+
+- Run the frontend server on the specified port:
+```
+$ PORT=3001 npm start
+```
+- Build:
+```
+$ npm run build
+```
+
+## Authors
+
+👤 **Kenny Salazar**
+
+- GitHub: [@helio3197](https://github.com/helio3197)
+- Twitter: [@kennysalazar31](https://twitter.com/kennysalazar31)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/kenny-salazar-1a1687110)
+
+👤 **Richard Opiyo**
+
+- GitHub: [@richaroppiyo](https://github.com/richardoppiyo)
+- Twitter: [@blessed_ricky](https://twitter.com/blessed_ricky)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/richardoppiyo/)
+
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Thanks to Microverse for the guidelines.
+- Original design by [Murat Korkmaz](https://www.behance.net/muratk)
+
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.

@@ -10,6 +10,7 @@ import lawyerCreate from './lawyers/lawyerCreate';
 import lawyerDestroy from './lawyers/lawyerDestroy';
 import lawyerShow from './lawyers/lawyerShow';
 import lawyerUpdate from './lawyers/lawyerUpdate';
+import reservationUpdate from './reservations/reservationUpdate';
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     reservations_create: reservationsCreate,
     users_edit: usersEdit,
     users_destroy: usersDestroy,
+    reservation_update: reservationUpdate,
   },
 });
 

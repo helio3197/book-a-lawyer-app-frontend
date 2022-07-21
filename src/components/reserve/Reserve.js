@@ -15,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import CustomDropMenu from './CustomDropMenu';
 import { getLawyers } from '../../redux/lawyers/lawyersIndex';
 import { createReservation, resetCreateReservationState } from '../../redux/reservations/reservationsCreate';
+import { fechReservations } from '../../redux/reservations/reservations';
 
 const Reserve = () => {
   const [params] = useSearchParams();
@@ -44,7 +45,8 @@ const Reserve = () => {
 
   useEffect(() => {
     if (reservationState.status === 'success') {
-      navigate('/', { state: { notice: 'Reservation created successfully!' } });
+      navigate('/reservations', { state: { notice: 'Reservation created successfully!' } });
+      dispatch(fechReservations());
     }
     if (typeof reservationState.error === 'string') {
       navigate(`${location.pathname}${location.search}`, { state: { notice: `Something went wrong: ${reservationState.error}` } });
@@ -76,6 +78,10 @@ const Reserve = () => {
 
   const removeSelectedLawyer = (id) => {
     const lawyerToRemove = lawyers.find((lawyer) => lawyer.id === +id);
+    if (!lawyerToRemove) {
+      setReservationData((state) => ({ ...state, lawyer_id: null }));
+      return null;
+    }
     const clickHandler = () => setReservationData((state) => ({ ...state, lawyer_id: null }));
 
     return (
@@ -126,6 +132,7 @@ const Reserve = () => {
   return (
     <Container fluid className="h-100 reserve-bg d-flex py-2 overflow-auto">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
+        <h2 className="text-center">Book a lawyer</h2>
         <Form className={reservationState.status === 'fetching' ? 'reserve-form position-relative' : 'reserve-form'}>
           <div className="mb-2">
             {(reservationData.lawyer_id && lawyers)
@@ -173,7 +180,7 @@ const Reserve = () => {
                 selected={reservationData.reservationdate}
                 onChange={(date) => setReservationData((state) => ({
                   ...state,
-                  reservationdate: date.getHours() < 8 ? new Date(date.setHours(9)) : date,
+                  reservationdate: date?.getHours() < 8 ? new Date(date?.setHours(9)) : date,
                 }))}
                 customInput={<CustomInput />}
                 minDate={new Date()}

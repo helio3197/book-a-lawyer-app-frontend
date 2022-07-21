@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
 
-const Notice = ({ message }) => {
+const Notice = ({ message, closeHandler }) => {
   const [show, setShow] = useState(true);
   useEffect(() => {
     window.history.pushState({
@@ -13,7 +13,7 @@ const Notice = ({ message }) => {
   }, [message]);
 
   return (
-    <Alert show={show} onClose={() => setShow(false)} variant="primary" dismissible className="notice m-0">
+    <Alert show={show} onClose={() => closeHandler(null)} variant="primary" dismissible className="notice m-0">
       <p className="m-0">{message}</p>
     </Alert>
   );
@@ -21,6 +21,7 @@ const Notice = ({ message }) => {
 
 Notice.propTypes = {
   message: PropTypes.string.isRequired,
+  closeHandler: PropTypes.func.isRequired,
 };
 
 export default Notice;
