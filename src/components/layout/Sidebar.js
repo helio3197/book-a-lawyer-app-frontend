@@ -17,6 +17,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import { signOut } from '../../redux/auth/auth';
 import logos from '../../assets/images/Logo.png';
+import { clearReservations } from '../../redux/reservations/reservations';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Sidebar = () => {
   const signoutHandler = () => {
     setShowSidebar((state) => !state);
     dispatch(signOut());
+    dispatch(clearReservations());
   };
 
   const navLinkHelper = ({

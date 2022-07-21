@@ -2,6 +2,7 @@ const API_RESERVATIONS_INDEX_ENDPOINT = `${process.env.REACT_APP_API_HOST}/api/v
 const REQUEST_STARTED = 'book-a-lawyer/reservations/REQUEST_STARTED';
 const REQUEST_FAILED = 'book-a-lawyer/reservations/REQUEST_FAILED';
 const REQUEST_COMPLETED = 'book-a-lawyer/reservations/REQUEST_COMPLETED';
+const CLEAR_RESERVATIONS = 'book-a-lawyer/reservations/CLEAR_RESERVATIONS';
 
 const initialState = {
   reservations: [],
@@ -21,10 +22,8 @@ const reducer = (state = initialState, action) => {
         ...action.payload,
       };
     case REQUEST_COMPLETED:
-      return {
-        ...state,
-        ...action.payload,
-      };
+    case CLEAR_RESERVATIONS:
+      return action.payload;
     default:
       return state;
   }
@@ -50,6 +49,13 @@ const requestCompleted = ({ reservations }) => ({
   payload: {
     status: 'completed',
     reservations,
+  },
+});
+
+export const clearReservations = () => ({
+  type: CLEAR_RESERVATIONS,
+  payload: {
+    status: 'resetted',
   },
 });
 

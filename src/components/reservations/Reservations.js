@@ -38,7 +38,7 @@ const Reservations = () => {
   });
 
   useEffect(() => {
-    if (reservationState.status !== 'completed') {
+    if (reservationState.status !== 'completed' && reservationState.status !== 'resetted') {
       dispatch(fechReservations());
     }
     if (lawyersState.status !== 'completed') {
