@@ -36,7 +36,7 @@ This repository is a React/Redux developed frontend app named "Book a lawyer App
 
 ## Live demo
 
-[Click Here]()
+[Click Here](https://book-a-lawyer-app.herokuapp.com)
 
 
 ## Getting Started
