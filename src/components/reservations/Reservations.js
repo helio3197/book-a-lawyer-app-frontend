@@ -21,6 +21,7 @@ const Reservations = () => {
   const reservationState = useSelector((state) => state.reservations);
   const editReservationState = useSelector((state) => state.reservation_update);
   const lawyersState = useSelector((state) => state.lawyers);
+  const delResevationState = useSelector((state) => state.delResevation);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get('p');
   const [showCurrentPage, setShowCurrentPage] = useState(+currentPage || 1);
@@ -71,6 +72,16 @@ const Reservations = () => {
       setShowEditModal(false);
     }
   }, [editReservationState.status]);
+
+  useEffect(() => {
+    if (delResevationState.status === 'failed') {
+      navigate('/reservations', { state: { notice: `Something went wrong: ${delResevationState.error}` } });
+    }
+    if (delResevationState.status === 'completed') {
+      navigate('/reservations', { state: { notice: 'Reservation deleted succesfully' } });
+      dispatch(fechReservations());
+    }
+  }, [delResevationState.status]);
 
   const deleteReservationData = (id) => () => {
     dispatch(deleteReservations(id));
@@ -142,7 +153,7 @@ const Reservations = () => {
   };
 
   return (
-    <section className="reservationtop gap-3">
+    <section className="reservationtop gap-3 position-relative">
       <h2 className="text-center m-0">Reservations</h2>
       <div className="reservation-container px-3 gap-3">
         {itemsToRender.map((reserve) => (
@@ -289,6 +300,14 @@ const Reservations = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {delResevationState.status === 'fetching'
+        && (
+        <div className="signout-loading">
+          <Spinner animation="border" variant="primary" role="status" className="my-auto">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+        )}
     </section>
   );
 };
