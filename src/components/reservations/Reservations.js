@@ -92,7 +92,7 @@ const Reservations = () => {
     return <Navigate to="/sign_in" state={{ notice: 'You need to sign in before you continue' }} />;
   }
 
-  if (lawyersState.status === 'idle' || lawyersState.status === 'fetching') {
+  if (lawyersState.status === 'idle' || lawyersState.status === 'fetching' || reservationState.status === 'idle' || reservationState.status === 'fetching') {
     return (
       <Container as="section" fluid className="py-2 lawyers align-items-center">
         <h1 className="mt-3">Please Wait...</h1>
@@ -111,7 +111,7 @@ const Reservations = () => {
     );
   }
 
-  if (!reservationState.reservations.length) {
+  if (!reservationState.reservations.length && reservationState.status === 'completed') {
     return (
       <Container as="section" fluid className="py-2 lawyers">
         <h2 className="mt-2 text-center mt-auto mb-auto">The reservation list is empty</h2>

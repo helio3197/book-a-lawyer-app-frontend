@@ -132,7 +132,7 @@ const Account = () => {
   return (
     <Container fluid className="h-100 reserve-bg d-flex py-2 overflow-auto">
       <Container fluid="sm" className="py-3 border rounded form-width-sm shadow my-auto bg-light">
-        <h1 className="text-center">Edit Pofile</h1>
+        <h1 className="text-center">Edit Profile</h1>
         <Form className="mb-2 position-relative">
           <div className="avatar mb-3">
             <div className="preview">
